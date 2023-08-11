@@ -7,7 +7,7 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
-	-- Telescope
+	-- Telescope -> Fuzzy Finder
 	use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
 	-- or                            , branch = '0.1.x',
@@ -18,7 +18,9 @@ return require('packer').startup(function(use)
 	use { "bluz71/vim-moonfly-colors", as = "moonfly" }
     use { "catppuccin/nvim", as = "catppuccin" }
 
-	-- Tree Sitter
+    use 'Mofiqul/dracula.nvim'
+
+	-- Tree Sitter -> Smart parser and Coloring
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = function()
@@ -27,7 +29,7 @@ return require('packer').startup(function(use)
 		end,
 	}
 
-    -- Nvim tree
+    -- Nvim-tree -> File Explorer
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
@@ -35,9 +37,11 @@ return require('packer').startup(function(use)
         },
     }
 
-	-- Other Pluggins
+	-- Harpoon
 	use('theprimeagen/harpoon')
+	-- Undo Tree
 	use('mbbill/undotree')
+	-- Fugitive -> Vim plugin 
 	use('tpope/vim-fugitive')
 
 	-- LSP Zero --> https://github.com/VonHeikemen/lsp-zero.nvim

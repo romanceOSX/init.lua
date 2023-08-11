@@ -1,4 +1,3 @@
-----------------------------------------------------------------------------
 local function my_on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -43,7 +42,7 @@ local function my_on_attach(bufnr)
 
     -- custom mappings
     -- opt() function makes these key-binds to apply only to the nvim-tree buffer
-    vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent,        opts('Up'))
+    vim.keymap.set('n', '<C-[>', api.tree.change_root_to_parent,        opts('Up'))
     vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
     -- on_attach
     vim.keymap.set("n", "l", edit_or_open,          opts("Edit Or Open"))
@@ -55,10 +54,9 @@ end
 -- pass to setup along with your other options
 require("nvim-tree").setup {
     ---
+    -- on_attach takes a function that runs when creating the nvim-tree buffer
     on_attach = my_on_attach,
     ---
 }
 ----------------------------------------------------------------------------
--- global
-vim.api.nvim_set_keymap("n", "<leader>t", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
 
