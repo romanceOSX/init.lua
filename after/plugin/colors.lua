@@ -3,7 +3,6 @@
 --      the keys, will they get defaulted or emtied
 --
 -- Function that messes with the background color 
---
 
 local dracula = require("dracula")
 dracula.setup({
@@ -13,7 +12,7 @@ dracula.setup({
     fg = "#F8F8F2",
     selection = "#44475A",
     comment = "#6272A4",
-    red = "#FF5555",
+    red = "#d65c9f",
     orange = "#FFB86C",
     yellow = "#F1FA8C",
     green = "#50fa7b",
