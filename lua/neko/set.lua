@@ -33,3 +33,5 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 -- vim.opt.foldmethod="indent"
+
+vim.opt.ignorecase = true
