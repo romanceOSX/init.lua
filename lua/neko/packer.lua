@@ -19,7 +19,10 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
 	}
     -- Telescope-nvim-native.nvim
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    -- CMake Install
+    -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    -- make Install
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
 	-- Color Themes
 	use { "bluz71/vim-moonfly-colors", as = "moonfly" }
