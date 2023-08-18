@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/torres/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["dracula.nvim"] = {
+    loaded = true,
+    path = "/home/torres/.local/share/nvim/site/pack/packer/start/dracula.nvim",
+    url = "https://github.com/Mofiqul/dracula.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/home/torres/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -148,6 +153,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/torres/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/home/torres/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
