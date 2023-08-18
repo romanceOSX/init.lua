@@ -7,7 +7,12 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
-	-- Telescope -> Fuzzy Finder
+    -- Toggleterm --> Integrated Terminal
+    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end}
+
+    -- Telescope -> Fuzzy Finder
 	use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
 	-- or                            , branch = '0.1.x',
