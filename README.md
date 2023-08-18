@@ -1,4 +1,4 @@
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
+wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip 
 
 ### Features
 
@@ -21,17 +21,10 @@ wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
 
 ## Pluggins Used
 
-telescope.nvim (Fuzzy Finder)
-https://github.com/nvim-telescope/telescope.nvim
-
-ripgrep (Telescope Grepping)
-https://github.com/nvim-telescope/telescope.nvim
-
-dracula.nvim
-https://github.com/Mofiqul/dracula.nvim
-
-nvim-treesitter
-https://github.com/nvim-treesitter/nvim-treesitter
+- [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [dracula.nvim](https://github.com/Mofiqul/dracula.nvim)
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 
 #### Git Downloads
 
@@ -47,5 +40,5 @@ https://github.com/nvim-treesitter/nvim-treesitter
 - [ ] Add Pluggin list with links to their repos accordingly
 - [ ] Sh scripts for ensuring the extra dependencies 
 
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
+wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip 
 
