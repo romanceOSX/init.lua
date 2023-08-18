@@ -1,6 +1,37 @@
 wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
 
+### Features
+
+- Fuzzy Finder
+- File Explorer
+- git integration
+- color themes
+- file bookmarking
+- lsp
+- autocompletion
+
 ### REQUIREMENTS
+
+- git
+- npm
+- python3 environment
+- cargo (rust package manager)
+
+----------------------------------------------------------
+
+## Pluggins Used
+
+telescope.nvim (Fuzzy Finder)
+https://github.com/nvim-telescope/telescope.nvim
+
+ripgrep (Telescope Grepping)
+https://github.com/nvim-telescope/telescope.nvim
+
+dracula.nvim
+https://github.com/Mofiqul/dracula.nvim
+
+nvim-treesitter
+https://github.com/nvim-treesitter/nvim-treesitter
 
 #### Git Downloads
 
