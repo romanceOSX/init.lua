@@ -8,6 +8,7 @@ lsp.ensure_installed({
 	'lua_ls',
 	'clangd',
 	'pyright',
+    'neocmake',
 })
 
 -- Fix Undefined global 'vim'
