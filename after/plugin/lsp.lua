@@ -11,9 +11,9 @@ lsp.ensure_installed({
     'neocmake',
 })
 
+-------------------------------------------------------------------------------------
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
@@ -26,6 +26,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 
 cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
+
+-------------------------------------------------------------------------------------
+-- lsp-zero
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings
@@ -60,5 +63,23 @@ lsp.setup()
 
 vim.diagnostic.config({
     virtual_text = true
+})
+
+-------------------------------------------------------------------------------------
+-- Friendly Snipps setup
+-- Make sure you setup `cmp` after lsp-zero
+local cmp_action = require('lsp-zero').cmp_action()
+
+require('luasnip.loaders.from_vscode').lazy_load()
+
+cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'},
+    {name = 'luasnip'},
+  },
+  mapping = {
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+  }
 })
 

@@ -1,78 +1,70 @@
 -- This file can be loaded by calling `lua require(plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+--vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-	-- Packer can manage itself
-	use 'wbthomason/packer.nvim'
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
-    -- Toggleterm --> Integrated Terminal
+    -- Toggleterm 
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end}
 
-    -- Telescope -> Fuzzy Finder
-	use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
-	-- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-	}
-    -- Telescope-nvim-native.nvim
-    -- CMake Install
-    -- use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-    -- make Install
+    -- Telescope 
+    use { 'nvim-telescope/telescope.nvim', tag = '0.1.2',
+    -- or                            , branch = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} } }
+
+    -- telescope-fzf
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
-	-- Color Themes
-	use { "bluz71/vim-moonfly-colors", as = "moonfly" }
-    use { "catppuccin/nvim", as = "catppuccin" }
-
+    -- Color Themes
     use 'Mofiqul/dracula.nvim'
 
-	-- Tree Sitter -> Smart parser and Coloring
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = function()
-			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-			ts_update()
-		end,
-	}
+    -- Tree Sitter
+    use { 'nvim-treesitter/nvim-treesitter',
+    run = function()
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        ts_update()
+    end, }
 
     -- Nvim-tree -> File Explorer
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons', -- optional
-        },
-    }
+    use { 'nvim-tree/nvim-tree.lua',
+    requires = {
+        'nvim-tree/nvim-web-devicons', -- optional
+    }, }
 
-	-- Harpoon
-	use('theprimeagen/harpoon')
-	-- Undo Tree
-	use('mbbill/undotree')
-	-- Fugitive -> Vim plugin 
-	use('tpope/vim-fugitive')
+    -- Harpoon
+    use{'theprimeagen/harpoon'}
+    -- Undo Tree
+    use{'mbbill/undotree'}
+    -- Fugitive -> Vim plugin 
+    use{'tpope/vim-fugitive'}
+    -- LSP Zero --> https://github.com/VonHeikemen/lsp-zero.nvim
+    use { 'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    requires = {
+        -- LSP Support
+        {'neovim/nvim-lspconfig'},             -- Required
+        {                                      -- Optional
+        'williamboman/mason.nvim',
+        run = function()
+            pcall(vim.cmd, 'MasonUpdate')
+        end, },
+        {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-	-- LSP Zero --> https://github.com/VonHeikemen/lsp-zero.nvim
-	use {
-		'VonHeikemen/lsp-zero.nvim',
-		branch = 'v2.x',
-		requires = {
-			-- LSP Support
-			{'neovim/nvim-lspconfig'},             -- Required
-			{                                      -- Optional
-			'williamboman/mason.nvim',
-			run = function()
-				pcall(vim.cmd, 'MasonUpdate')
-			end,
-		},
-		{'williamboman/mason-lspconfig.nvim'}, -- Optional
+        -- Autocompletion
+        {'hrsh7th/nvim-cmp'},     -- Required
+        {'hrsh7th/cmp-nvim-lsp'}, -- Required
+        {'L3MON4D3/LuaSnip'},     -- Required
+    } }
 
-		-- Autocompletion
-		{'hrsh7th/nvim-cmp'},     -- Required
-		{'hrsh7th/cmp-nvim-lsp'}, -- Required
-		{'L3MON4D3/LuaSnip'},     -- Required
-		}
-	}
+    -- cmp_luasnip
+    use {"saadparwaiz1/cmp_luasnip"}
+
+    -- Friendly Snippets
+    use{"rafamadriz/friendly-snippets"}
+
 end)
