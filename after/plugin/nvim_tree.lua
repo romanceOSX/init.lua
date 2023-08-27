@@ -1,3 +1,17 @@
+
+-- global
+-- I wont disable netrw yet since tree-less workflow is also pog
+vim.api.nvim_set_keymap("n", "<leader>e", ":NvimTreeToggle<cr>", {silent = true, noremap = true})
+
+-- disable netrw at the very start of your init.lua
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+------------------------------------------------------------------------------------------------
+
 local function my_on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -51,12 +65,22 @@ local function my_on_attach(bufnr)
     vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse All"))
 end
 
+------------------------------------------------------------------------------------------------
+
 -- pass to setup along with your other options
 require("nvim-tree").setup {
     ---
     -- on_attach takes a function that runs when creating the nvim-tree buffer
     on_attach = my_on_attach,
-    ---
-}
-----------------------------------------------------------------------------
 
+    sort_by = "case_sensitive",
+    view = {
+        width = 30,
+    },
+    renderer = {
+        group_empty = true,
+    },
+    filters = {
+        dotfiles = true,
+    },
+}
