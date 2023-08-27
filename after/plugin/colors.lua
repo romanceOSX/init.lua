@@ -57,7 +57,7 @@ dracula.setup({
 })
 
 function ColorMyPencils(color)
-    color = color or "moonfly"
+    color = color or "pablo"
 
     --    if string.match(color,"[Cc]atppuccin") then
     --        -- find a function that parses after '-' symbol
