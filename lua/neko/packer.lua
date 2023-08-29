@@ -10,7 +10,7 @@ return require('packer').startup(function(use)
     -- Toggleterm 
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
-    end}
+    end, }
 
     -- Telescope 
     use { 'nvim-telescope/telescope.nvim', tag = '0.1.2',
@@ -22,6 +22,7 @@ return require('packer').startup(function(use)
 
     -- Color Themes
     use 'Mofiqul/dracula.nvim'
+    use {'nyoom-engineering/oxocarbon.nvim'}
 
     -- Tree Sitter
     use { 'nvim-treesitter/nvim-treesitter',
@@ -59,12 +60,15 @@ return require('packer').startup(function(use)
         {'hrsh7th/nvim-cmp'},     -- Required
         {'hrsh7th/cmp-nvim-lsp'}, -- Required
         {'L3MON4D3/LuaSnip'},     -- Required
-    } }
+    }}
 
     -- cmp_luasnip
     use {"saadparwaiz1/cmp_luasnip"}
 
     -- Friendly Snippets
     use{"rafamadriz/friendly-snippets"}
+
+    -- indent-blankline.nvim
+    use {"lukas-reineke/indent-blankline.nvim"}
 
 end)
