@@ -82,5 +82,6 @@ end
 
 --ColorMyPencils("catppuccin-mocha")
 ColorMyPencils("dracula-soft")
+ColorMyPencils("dracula-soft")
 --ColorMyPencils("oxocarbon")
 
