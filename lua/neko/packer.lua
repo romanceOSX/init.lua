@@ -7,68 +7,37 @@
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
-
     -- Toggleterm 
     use {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end, }
-
     -- Telescope 
     use { 'nvim-telescope/telescope.nvim', tag = '0.1.2',
-    -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} } }
-
-    -- telescope-fzf
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-
+    -- Telescope-fzf
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     -- Color Themes
-    use 'Mofiqul/dracula.nvim'
+    use {'Mofiqul/dracula.nvim'}
     use {'nyoom-engineering/oxocarbon.nvim'}
-
-    -- Tree Sitter
-    use { 'nvim-treesitter/nvim-treesitter',
-    run = function()
-        require("nvim-treesitter.install").update { with_sync = true } end
-        , }
-
-    -- Nvim-tree -> File Explorer
-    use { 'nvim-tree/nvim-tree.lua',
-    requires = {
-        'nvim-tree/nvim-web-devicons', -- optional
-    }, }
-
     -- Harpoon
     use{'theprimeagen/harpoon'}
     -- Undo Tree
     use{'mbbill/undotree'}
-    -- Fugitive -> Vim plugin 
+    -- Fugitive
     use{'tpope/vim-fugitive'}
-    -- LSP Zero --> https://github.com/VonHeikemen/lsp-zero.nvim
-    use { 'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    requires = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},             -- Required
-        {                                      -- Optional
-        'williamboman/mason.nvim',
-        run = function()
-            pcall(vim.cmd, 'MasonUpdate')
-        end, },
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},     -- Required
-        {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        {'L3MON4D3/LuaSnip'},     -- Required
-    }}
-
-    -- cmp_luasnip
-    use {"saadparwaiz1/cmp_luasnip"}
-
-    -- Friendly Snippets
-    use{"rafamadriz/friendly-snippets"}
-
     -- indent-blankline.nvim
     use {"lukas-reineke/indent-blankline.nvim"}
+    -- LspConfig
+    use {'neovim/nvim-lspconfig'}
+    -- nvim-cmp
+    use {'hrsh7th/nvim-cmp'}
+    use {'hrsh7th/cmp-nvim-lsp'}
+    use {'hrsh7th/cmp-nvim-lua'}
+    use {'hrsh7th/cmp-buffer'}
+    use { 'saadparwaiz1/cmp_luasnip' }      -- Allows for completion sources provided by luasnip, not just from lsp
+    --Luasnip
+    use { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" }
+    use { "rafamadriz/friendly-snippets" }  -- Sample snippets
+    use { "windwp/nvim-autopairs"}
 end)
 
