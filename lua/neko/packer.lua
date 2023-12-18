@@ -35,9 +35,11 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lua'}
     use {'hrsh7th/cmp-buffer'}
     use { 'saadparwaiz1/cmp_luasnip' }      -- Allows for completion sources provided by luasnip, not just from lsp
-    --Luasnip
+    -- Luasnip
     use { "L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp" }
     use { "rafamadriz/friendly-snippets" }  -- Sample snippets
     use { "windwp/nvim-autopairs"}
+    -- Treesitter
+    use {'nvim-treesitter/nvim-treesitter'}
 end)
 

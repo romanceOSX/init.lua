@@ -134,6 +134,11 @@ _G.packer_plugins = {
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
   ["oxocarbon.nvim"] = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim",

@@ -1,3 +1,9 @@
+local function check_os()
+   return  vim.loop.os_uname().sysname
+end
+
+local _os = check_os()
+
 vim.opt.guicursor = ""
 
 vim.opt.nu = true
@@ -17,7 +23,12 @@ vim.opt.smartindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+
+-- Only aply for BSD
+if _os == "FreeBSD" then
+    vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+end
+
 vim.opt.undofile = true
 
 vim.opt.hlsearch = true
