@@ -6,18 +6,18 @@ local has_words_before = function()
 end
 
 
--- Luasnip --------------------------------------------------------------------
+-- LUASNIP --------------------------------------------------------------------
 local luasnip = require("luasnip")
 -- Load snippets provided by friendly snippets
 require('luasnip.loaders.from_vscode').lazy_load()
 -- Redundant standalone mappings, functionality is already handled by cmp but it
 -- might become useful to jump in between luasnip nodes even when cmp is visible
 vim.keymap.set({"i", "s"}, "<C-k>", function () luasnip.expand() end)   -- redundant handled by cmp
-vim.keymap.set({"i", "s"}, "<C-l>", function () luasnip.expand_or_jump(1) end)
+vim.keymap.set({"i", "s"}, "<C-l>", function () luasnip.expand_or_jump() end)
 vim.keymap.set({"i", "s"}, "<C-h>", function () luasnip.jump(-1) end)
 
 
--- cmp ------------------------------------------------------------------------
+-- CMP ------------------------------------------------------------------------
 local cmp = require("cmp")
 
 -- Only selects the text, it does not actually insert it
@@ -29,7 +29,7 @@ local options = {
             if cmp.visible() then
                 -- nothing selected yet, then do normal cmp next action
                 cmp.select_prev_item(cmp_select)
-            elseif luasnip.expand_or_jumpable(-1) then
+            elseif luasnip.jumpable(-1) then
                 -- Jump to the next luasnip field
                 luasnip.jump(-1)
             else
@@ -54,10 +54,8 @@ local options = {
 
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),     -- snippet engine needs to be available
         ["<C-e>"] = cmp.mapping.close(),
-
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-
         ["<C-Space>"] = cmp.mapping.complete(),                 -- invoke completion menu
     },
 
@@ -89,10 +87,29 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- LSP ------------------------------------------------------------------------
 local lsp = require("lspconfig")
 
+-- lsp keybings autocommand, they are only activated if the lsp client is attached to the buffer
+local function client_attach(args)
+    local opts = {buffer = args.buf, noremap = true}
+
+    vim.keymap.set("n", "gd", function () vim.lsp.buf.definition() end, opts)
+    vim.keymap.set("n", "gD", function () vim.lsp.buf.declaration() end, opts)
+    vim.keymap.set("n", "gr", function () vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "gs", function () vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "gR", function () vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("n", "go", function () vim.lsp.buf.type_definition() end, opts)
+    vim.keymap.set("n", "<F4>", function () vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set("n", "K", function () vim.lsp.buf.hover() end, opts)
+end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = client_attach
+})
+
+-- Language servers configuration setup calls
 -- clangd15
 lsp.clangd.setup{
     cmd = {'clangd15'},
-    capabilities = capabilities
+    capabilities = capabilities,
 }
 
 -- lua-language-server
@@ -104,14 +121,17 @@ lsp.lua_ls.setup{
                 globals = {'vim'}
             }
         }
-    }
+    },
+    capabilities = capabilities,
 }
 
 --  pyright
-lsp.pyright.setup{}
+lsp.pyright.setup{
+    --capabilities = capabilities,
+}
 
 
--- autopairs ------------------------------------------------------------------
+-- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
 require("nvim-autopairs").setup{}
 
@@ -120,4 +140,7 @@ require("nvim-autopairs").setup{}
 -- [ ] - Add cmp for search menu '/' and for cmd menu as well ':'
 -- [ ] - Add cmp for cmd menu ':'
 -- [ ] - cmp.mapping(function () ... end) vs cmp.mapping.complete()
+-- [ ] - Implement a way to extend the setup keys for each of the servers 
+--       programattically, priving the server name i.e. 'clangd' and the key to
+--       edit
 
