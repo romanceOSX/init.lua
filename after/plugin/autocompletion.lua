@@ -127,7 +127,7 @@ lsp.lua_ls.setup{
 
 --  pyright
 lsp.pyright.setup{
-    --capabilities = capabilities,
+    capabilities = capabilities,
 }
 
 
