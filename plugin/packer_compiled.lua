@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp-buffer",
     url = "https://github.com/hrsh7th/cmp-buffer"
   },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -94,6 +99,11 @@ _G.packer_plugins = {
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
     url = "https://github.com/hrsh7th/cmp-nvim-lua"
   },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
   cmp_luasnip = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
@@ -103,6 +113,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/dracula.nvim",
     url = "https://github.com/Mofiqul/dracula.nvim"
+  },
+  everforest = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/everforest",
+    url = "https://github.com/sainnhe/everforest"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -118,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -139,11 +159,6 @@ _G.packer_plugins = {
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["oxocarbon.nvim"] = {
-    loaded = true,
-    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/oxocarbon.nvim",
-    url = "https://github.com/nyoom-engineering/oxocarbon.nvim"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -153,6 +168,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  sonokai = {
+    loaded = true,
+    path = "/usr/home/neko/.local/share/nvim/site/pack/packer/start/sonokai",
+    url = "https://github.com/sainnhe/sonokai"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
