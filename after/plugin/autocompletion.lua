@@ -23,41 +23,67 @@ local cmp = require("cmp")
 -- Only selects the text, it does not actually insert it
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-local options = {
-    mapping = {
-        ["<C-p>"] = cmp.mapping(function (fallback)
+local mappings = {
+    ["<C-p>"] = cmp.mapping(function (fallback)
+        if cmp.visible() then
+            -- nothing selected yet, then do normal cmp next action
+            cmp.select_prev_item(cmp_select)
+        elseif luasnip.jumpable(-1) then
+            -- Jump to the next luasnip field
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, {'i','s'}),
+
+    ["<C-n>"] = cmp.mapping(function (fallback)
+        if cmp.visible() then
+            -- nothing selected yet, then do normal cmp next action
+            cmp.select_next_item(cmp_select)
+        elseif luasnip.expand_or_jumpable() then
+            -- Jump to the next luasnip field
+            luasnip.expand_or_jump()
+        elseif has_words_before() then
+            -- Invoke cmp menu
+            cmp.complete()
+        else
+            fallback()
+        end
+    end, {'i','s'}),
+
+    ["<C-y>"] = cmp.mapping.confirm({ select = true }),     -- snippet engine needs to be available
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),                 -- invoke completion menu
+}
+
+local exec_mappings = {
+    ['<Tab>'] = {
+        c = function()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                cmp.complete()
+            end
+        end,
+    },
+
+    ["<S-Tab>"] ={
+        c = function ()
             if cmp.visible() then
                 -- nothing selected yet, then do normal cmp next action
                 cmp.select_prev_item(cmp_select)
-            elseif luasnip.jumpable(-1) then
+            else
                 -- Jump to the next luasnip field
                 luasnip.jump(-1)
-            else
-                fallback()
             end
-        end, {'i','s'}),
-
-        ["<C-n>"] = cmp.mapping(function (fallback)
-            if cmp.visible() then
-                -- nothing selected yet, then do normal cmp next action
-                cmp.select_next_item(cmp_select)
-            elseif luasnip.expand_or_jumpable() then
-                -- Jump to the next luasnip field
-                luasnip.expand_or_jump()
-            elseif has_words_before() then
-                -- Invoke cmp menu
-                cmp.complete()
-            else
-                fallback()
-            end
-        end, {'i','s'}),
-
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),     -- snippet engine needs to be available
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),                 -- invoke completion menu
+        end
     },
+}
+
+local options = {
+    mapping = mappings,
 
     -- This is how cmp interacts with a specific snippet engine
     snippet = {
@@ -68,12 +94,28 @@ local options = {
         { name = "nvim_lsp" },      -- lsp sources (including snippets
         { name = "nvim_lua" },      -- lsp lua source for nvim variables
         { name = "luasnip" },       -- Add external sources, not only snippets from the lsp server
-        { name = "buffer" },        -- idk
     }
 }
 
 -- Apply settings
 cmp.setup(options)
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+        { name = 'buffer' }
+    }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = exec_mappings,
+    sources = {
+        { name = 'path' },
+        { name = 'cmdline' }
+    }
+})
 
 -- cmp-nvim-lsp
 -- The nvim-cmp almost supports LSP's capabilities, so you should advertise it
@@ -137,8 +179,8 @@ require("nvim-autopairs").setup{}
 
 
 -- TODO -----------------------------------------------------------------------
--- [ ] - Add cmp for search menu '/' and for cmd menu as well ':'
--- [ ] - Add cmp for cmd menu ':'
+-- [X] - Add cmp for search menu '/' and for cmd menu as well ':'
+-- [X] - Add cmp for cmd menu ':'
 -- [ ] - cmp.mapping(function () ... end) vs cmp.mapping.complete()
 -- [ ] - Implement a way to extend the setup keys for each of the servers 
 --       programattically, priving the server name i.e. 'clangd' and the key to
