@@ -149,12 +149,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Language servers configuration setup calls
 -- clangd15
+--      https://clangd.llvm.org/
 lsp.clangd.setup{
     cmd = {'clangd15'},
     capabilities = capabilities,
 }
 
 -- lua-language-server
+--      https://github.com/LuaLS/lua-language-server
 lsp.lua_ls.setup{
     settings = {
         Lua = {
@@ -168,6 +170,7 @@ lsp.lua_ls.setup{
 }
 
 --  pyright
+--      https://microsoft.github.io/pyright/#/installation
 lsp.pyright.setup{
     capabilities = capabilities,
 }
