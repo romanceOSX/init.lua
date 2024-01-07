@@ -172,6 +172,10 @@ lsp.pyright.setup{
     capabilities = capabilities,
 }
 
+-- cmake-lsp
+--      https://github.com/regen100/cmake-language-server
+--      pip install cmake-language-server
+lsp.cmake.setup{}
 
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
