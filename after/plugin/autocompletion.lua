@@ -190,6 +190,13 @@ lsp.groovyls.setup{
     cmd = {"java", "-jar", "/home/neko/git/groovy-language-server/build/libs/groovy-language-server-all.jar"}
 }
 
+-- Set filetype for files named JenkinsFile to a groovy type
+vim.filetype.add({
+    pattern = {
+        ['.*JenkinsFile.*'] = 'groovy',
+        ['.*jenkinsfile.*'] = 'groovy'
+    }
+})
 
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
