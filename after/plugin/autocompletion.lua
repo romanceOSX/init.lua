@@ -126,6 +126,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- An example to setup clangd to use nvim-cmp cpabilities
 
 
+-- MASON ----------------------------------------------------------------------
+require("mason").setup()
+require("mason-lspconfig").setup()
+
+
 -- LSP ------------------------------------------------------------------------
 local lsp = require("lspconfig")
 
