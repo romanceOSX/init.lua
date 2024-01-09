@@ -132,6 +132,9 @@ require("mason-lspconfig").setup()
 
 
 -- LSP ------------------------------------------------------------------------
+-- Lsp servers will not be enforced by this configuration, they must be either
+-- install system-wide and available from PATH or through Mason in the meantime
+-- of the search for a better minimal solution
 local lsp = require("lspconfig")
 
 -- lsp keybings autocommand, they are only activated if the lsp client is attached to the buffer
@@ -191,9 +194,7 @@ lsp.cmake.setup{}
 --          sudo apt install default-jre
 --      For windows install it directly from java
 --          https://www.java.com/download/ie_manual.jsp
-lsp.groovyls.setup{
-    cmd = {"java", "-jar", "/home/neko/git/groovy-language-server/build/libs/groovy-language-server-all.jar"}
-}
+lsp.groovyls.setup{}
 
 -- Set filetype for files named JenkinsFile to a groovy type
 vim.filetype.add({
