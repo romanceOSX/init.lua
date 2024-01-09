@@ -180,6 +180,17 @@ lsp.pyright.setup{
 --      pip install cmake-language-server
 lsp.cmake.setup{}
 
+-- groovy-lsp
+--      https://github.com/GroovyLanguageServer/groovy-language-server
+--      Install java rte first:
+--          sudo apt install default-jre
+--      For windows install it directly from java
+--          https://www.java.com/download/ie_manual.jsp
+lsp.groovyls.setup{
+    cmd = {"java", "-jar", "/home/neko/git/groovy-language-server/build/libs/groovy-language-server-all.jar"}
+}
+
+
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
 require("nvim-autopairs").setup{}
