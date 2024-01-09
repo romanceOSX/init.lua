@@ -199,7 +199,8 @@ lsp.groovyls.setup{
 vim.filetype.add({
     pattern = {
         ['.*JenkinsFile.*'] = 'groovy',
-        ['.*jenkinsfile.*'] = 'groovy'
+        ['.*jenkinsfile.*'] = 'groovy',
+        ['.*enkins.*ile.*'] = 'groovy'
     }
 })
 
