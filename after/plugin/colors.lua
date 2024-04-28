@@ -1,5 +1,30 @@
+--[[
+    True color is defined as the 24-bit based coloring system, having a total of
+    2^24 color coding points, $TERM gives out this info.
+    In the case of OSX's default terminal is 8-bit color-based, meaning it is restricted
+--]]
 
-vim.opt.termguicolors = true        -- ???
+-- Sets coloring based on terminal's truecolor feature availability
+local function setup_term_color()
+    local result = false
+    local env = string.lower(os.getenv("TERM") or "")
+    if env == "" then
+        return 0
+    end
+    if string.find(env, "truecolor") then
+        result = true
+    end
+    if string.find(env, "24bit") then
+        result = true
+    end
+    if string.find(env, "iterm") then
+        result = true
+    end
+    vim.opt.termguicolors = result
+end
+
+-- setup terminal colors
+setup_term_color()
 
 -- dracula theme setup
 local dracula = require('dracula')
