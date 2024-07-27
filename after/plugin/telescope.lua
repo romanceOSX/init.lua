@@ -17,6 +17,11 @@ vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
     builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
+vim.keymap.set('n', '<leader>pw', builtin.grep_string)
+vim.keymap.set('n', '<leader>fw', builtin.grep_string)
+vim.keymap.set('n', '<leader>ff', function()
+  builtin.grep_string({search_file=vim.fn.expand("<cword>")})
+end)
 vim.keymap.set('n', '<leader>pS', grep_find_files, {})
 vim.keymap.set('n','<leader>vh',builtin.help_tags, {})
 
