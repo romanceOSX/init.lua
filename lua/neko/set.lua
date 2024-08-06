@@ -10,9 +10,11 @@ vim.opt.nu = true
 vim.opt.rnu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+-- Indenting tab to 4 spaces
+local tabwidth = 4
+vim.opt.tabstop = tabwidth
+vim.opt.softtabstop = tabwidth
+vim.opt.shiftwidth = tabwidth
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
