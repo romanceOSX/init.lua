@@ -207,6 +207,20 @@ vim.filetype.add({
     }
 })
 
+-- Rust
+lsp.rust_analyzer.setup {
+    settings = {
+        ['rust-analyzer'] = {
+            check = {
+                command = "clippy";
+            },
+            diagnostics = {
+                enable = true;
+            }
+        }
+    }
+}
+
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
 require("nvim-autopairs").setup{}
