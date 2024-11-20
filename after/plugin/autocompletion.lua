@@ -160,6 +160,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --      https://clangd.llvm.org/
 lsp.clangd.setup{
     capabilities = capabilities,
+    init_options = {
+        fallbackFlags = {'--std=c++20'}
+    }
 }
 
 -- lua-language-server
