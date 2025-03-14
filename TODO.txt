@@ -30,6 +30,24 @@ runtimepath and searching modules
 
 Package searchers
     --> https://www.lua.org/manual/5.4/manual.html#pdf-package.cpath
+    A table used by the require() function
+    It contains 4 searcher functions
+        - looks for a loader in the package.preload table
+        - looks for a loader as a Lua library stored in package.path (package.searchpath)
+        - loader in the C library given by package.cpath
+
+    package.searchpath()
+        package.path is the input to this function
+        it replaces the '?'s in path with the module named requested by 'required' and tries
+        to load these modules
+
+    conlcusion
+        nvim prepends the search paths with the runtimepath paths
+
+        lua does its thing by first searching the lua modules (through the lua loader) and
+        then the c modules (through the C loader)
+
+    runtimepath is the thing that neovim provides, everything else is lua
 
 package.cpath
 package.path
