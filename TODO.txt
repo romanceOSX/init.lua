@@ -1,6 +1,5 @@
 2025-03-13
 
-
 Lua engine nvim
     nvim has the following libraries available for lua
         - lua stdlib composed of:
@@ -84,3 +83,22 @@ Initialization
             same situation, nvim looks for the plugin dirs, and *after dirs are skipped
         the after/ scripts are loaded
     
+Lua vimscript bridge
+    Note that objects passed to vim functions are always passed by copy, meaning
+    that you cannot edit a lua's object from a vim function
+
+    The folowing commands represent the interface of such bridge
+
+        vim.call(<funct>, <...>)
+            equivalent to vim.fn.<funct>(<...>)
+        vim.fn.<funct>(<...>)
+            these are vim's built-in functions or user-defined functions
+        vim.cmd(<command>)
+            these are the ':' commands
+            ** and overall vimscript?
+            Note that you cannot directly retreive values from this call
+
+Printing in neovim
+    Note that whenever the printing string is too big, neoivm calls less (or 'more' command) in
+    order to get an scrollable output
+
