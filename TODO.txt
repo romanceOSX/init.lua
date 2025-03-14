@@ -71,3 +71,16 @@ package.cpath vs package.path
         bar/lua/mod.so
         bar/lua/mod.dll
 
+Initialization
+    Step 7 of neovim initialization is where user config is introduced
+        aka. load the init.lua
+    Step 10, load plugin scripts
+        Lua scripts
+            load all the .lua's inside the plugin dirs in 'runtimepath'
+                aka. -> runtimepath/plugin/*.lua
+            note that directories ending in after will be skipped
+        packages
+            packages are loaded, they are inside an special directory 'packpath'
+            same situation, nvim looks for the plugin dirs, and *after dirs are skipped
+        the after/ scripts are loaded
+    
