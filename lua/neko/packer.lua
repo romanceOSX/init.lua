@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
     -- Fugitive
     use{'tpope/vim-fugitive'}
     -- indent-blankline.nvim
-    use {"lukas-reineke/indent-blankline.nvim"}
+    -- use {"lukas-reineke/indent-blankline.nvim"}
     -- LspConfig
     use {'neovim/nvim-lspconfig'}
     -- mason
