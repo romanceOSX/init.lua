@@ -1,0 +1,55 @@
+2025-03-13
+
+
+Lua engine nvim
+    nvim has the following libraries available for lua
+        - lua stdlib composed of:
+            :lua print(vim.inspect(vim)), this inspects the whole vim.* module
+            - 'editor stdlib' API
+                interface to vimscript
+                available through vim.*
+                    - vimscript functions
+                    - ex commands
+            - the lua API
+                available through vim.api.* specifically
+
+Ex commands vs Built-in commands
+    They are not the same
+
+    Ex commands are called through the ':' interface
+    Built-in commands are called either from a vimscript or through 
+    the :call Ex command
+
+runtimepath and searching modules
+    runtime path is a list of comma separated directories
+
+    first nvim looks for .lua modules, then searches for .dll or .so modules
+
+    nvim adjusts package.cpath and package.path according to the 'runtimepath' value
+    this happens anytime the runtimepath is changed
+
+Package searchers
+    --> https://www.lua.org/manual/5.4/manual.html#pdf-package.cpath
+
+package.cpath
+package.path
+    they are a list of patterns with a '?' e.g.:
+        ./?.so;./?.dll
+    the question mark gets substituted by the name of the searched module
+    
+    These paths are only used if the .lua modules where not found
+
+package.cpath vs package.path
+
+    For example, if 'runtimepath' is `foo,bar` and |package.cpath| was
+    `./?.so;./?.dll` at startup, `require('mod')` searches these paths in order
+    and loads the first module found ("first wins"): >
+        foo/lua/mod.lua
+        foo/lua/mod/init.lua
+        bar/lua/mod.lua
+        bar/lua/mod/init.lua
+        foo/lua/mod.so
+        foo/lua/mod.dll
+        bar/lua/mod.so
+        bar/lua/mod.dll
+
