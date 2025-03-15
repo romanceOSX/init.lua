@@ -15,3 +15,7 @@ vim.keymap.set("n", "<Esc>", "<cmd> noh <CR>")
 -- Buffer navigation
 vim.keymap.set("n", "<leader>gb", ":buffers<CR>:buffer <Space>")
 
+-- Marks navigation
+vim.keymap.set("n", "<leader>gm", ":marks<CR> <Space>")                         -- This is wrong
+
+
