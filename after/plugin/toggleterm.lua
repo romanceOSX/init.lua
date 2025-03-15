@@ -1,50 +1,43 @@
--- toggle'd terminal
+-- toggleterm config
+-- TODO: add a more modular way to add custom terminals
 
-require("toggleterm").setup{
-    open_mapping = [[<c-\>]],
-    autochdir = true,
-    direction = 'horizontal',
-    shade_terminals = true,
-    --on_open = function (term)
-    --    -- get current buffer directory
-    --    local dir = vim.api.nvim_buf_get_name(0)
-    --    print(dir,'\n')
-    --    term:change_dir(dir,false)
-    --end
-    float_opts = {border = 'curved',
-        title_pos = "left"},
-    winbar = {enabled = true}
-}
+-- only to set up autocommands
+require("toggleterm").setup{ }
+
+-- mapping between terminal names and their terminal objects
+local terminals = { }
 
 -- lazygit toggle terminal
-
 local Terminal  = require('toggleterm.terminal').Terminal
 
-local function _create_lg_term()
-    local term = Terminal:new({
-        cmd = "lazygit",
-        hidden = false,
-        --dir = "gitdir",
-    })
-    term:spawn()
-    return term
-end
-
-local lazygit_term = _create_lg_term()
-
-local function _lazygit_toggle()
-    lazygit_term:toggle()
-end
-
--- in-terminal mappings
-
-function _G.set_terminal_keymaps()
+-- keymaps
+-- note that there shouldn't be any mappings with <leader> on terminal mode
+-- otherwise you won't be able to type properly
+function _G.set_terminal_keymaps_shell(term)
     local opts = {buffer = 0}
-    vim.keymap.set('t', [[<C-\>]], _lazygit_toggle, opts)
+    vim.keymap.set('t', [[<C-\>]], terminals.shell, opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://*lazygit* lua set_terminal_keymaps()')
+function _G.set_terminal_keymaps_lazygit(term)
+    local opts = {buffer = 0}
+    vim.keymap.set('t', [[<C-\>]], terminals.lazygit, opts)
+end
 
-vim.keymap.set("n", "<leader>l", _lazygit_toggle, {noremap = true, silent = true})
+local lazygit_term = Terminal:new{
+    cmd = "lazygit",
+    hidden = false,
+    direction = "float",
+    on_open = set_terminal_keymaps_lazygit,
+}
+
+local shell_term = Terminal:new{
+    direction = "float",
+    on_open = set_terminal_keymaps_shell,
+}
+
+terminals.shell = function() return shell_term:toggle() end
+terminals.lazygit = function() return lazygit_term:toggle() end
+
+vim.keymap.set("n", [[<C-\>]], terminals.shell, {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>l", terminals.lazygit, {noremap = true, silent = true})
 
