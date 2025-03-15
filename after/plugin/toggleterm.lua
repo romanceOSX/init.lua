@@ -21,6 +21,7 @@ end
 function _G.set_terminal_keymaps_lazygit(term)
     local opts = {buffer = 0}
     vim.keymap.set('t', [[<C-\>]], terminals.lazygit, opts)
+    vim.keymap.set('t', 'q', terminals.lazygit, opts)
 end
 
 local lazygit_term = Terminal:new{
@@ -37,6 +38,10 @@ local shell_term = Terminal:new{
 
 terminals.shell = function() return shell_term:toggle() end
 terminals.lazygit = function() return lazygit_term:toggle() end
+
+-- spawn processes
+lazygit_term:spawn()
+shell_term:spawn()
 
 vim.keymap.set("n", [[<C-\>]], terminals.shell, {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>l", terminals.lazygit, {noremap = true, silent = true})
