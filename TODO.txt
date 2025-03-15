@@ -102,3 +102,10 @@ Printing in neovim
     Note that whenever the printing string is too big, neoivm calls less (or 'more' command) in
     order to get an scrollable output
 
+ToggleTerm
+    The ToggleTerm command smartly creates a new terminal if not present already only if a number was
+    perpended to the command i.e. 2ToggleTerm, otherwise if ther is no number, nothing will happen, since
+    nothing is created
+        v:count 0 = toggle the last terminal
+
+
