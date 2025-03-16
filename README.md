@@ -1,10 +1,6 @@
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
+# 🦄💫 init.lua
 
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
-
-# CATBOY.NVIM
-
-Catboy's Brutalist nvim setup
+Personal neovim configuration
 
 ## Pluggins Used
 
@@ -17,7 +13,7 @@ Catboy's Brutalist nvim setup
 - Smart language parser [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
 - Web Devicons [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 
-## Requirements
+## System's requirements
 
 - git
 - npm
@@ -38,6 +34,3 @@ Catboy's Brutalist nvim setup
 - [ ] Add Pluggin list with links to their repos accordingly
 - [ ] Sh scripts for ensuring the extra dependencies 
 
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
-
-wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip wip
