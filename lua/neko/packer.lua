@@ -1,37 +1,20 @@
--- This file can be loaded by calling `lua require(plugins')` from your init.vim
-
--- Only required if you have packer configured as `opt`
---vim.cmd [[packadd packer.nvim]]
-
 -- Packer Startup
 return require('packer').startup(function(use)
-    -- Packer can manage itself
+    -- packer
     use {'wbthomason/packer.nvim'}
-    -- Toggleterm 
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function() require("toggleterm").setup() end,}
-    -- Telescope 
-    use {'nvim-telescope/telescope.nvim', tag = '0.1.2', requires = {{'nvim-lua/plenary.nvim'}}}
-    -- Telescope-fzf
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'}
-    -- Color Themes
+
+    -- color themes
     use {'Mofiqul/dracula.nvim'}
-    use {"EdenEast/nightfox.nvim"}
-    use {"sainnhe/sonokai"}
-    use {"sainnhe/everforest"}
-    -- Harpoon
-    use{'theprimeagen/harpoon'}
-    -- Undo Tree
-    use{'mbbill/undotree'}
-    -- Fugitive
-    use{'tpope/vim-fugitive'}
-    -- indent-blankline.nvim
-    -- use {"lukas-reineke/indent-blankline.nvim"}
-    -- LspConfig
+    use {'EdenEast/nightfox.nvim'}
+    use {'sainnhe/sonokai'}
+    use {'sainnhe/everforest'}
+
+    -- lsp
     use {'neovim/nvim-lspconfig'}
-    -- mason
-    use {"williamboman/mason.nvim"}
-    use {"williamboman/mason-lspconfig.nvim"}   -- Closes gaps between mason and lspconfig
-    -- nvim-cmp
+    use {'williamboman/mason.nvim'}
+    use {'williamboman/mason-lspconfig.nvim'}   -- Closes gaps between mason and lspconfig
+
+    -- autocompletion
     use {'hrsh7th/nvim-cmp'}
     use {'hrsh7th/cmp-nvim-lsp'}
     use {'hrsh7th/cmp-nvim-lua'}
@@ -39,11 +22,24 @@ return require('packer').startup(function(use)
     use {'hrsh7th/cmp-buffer'}
     use {'hrsh7th/cmp-cmdline'}
     use {'hrsh7th/cmp-path'}
-    -- Luasnip
-    use {"L3MON4D3/LuaSnip", tag = "v2.*", run = "make install_jsregexp"}
-    use {"rafamadriz/friendly-snippets"}  -- Sample snippets
-    use {"windwp/nvim-autopairs"}
-    -- Treesitter
+
+    -- snippets
+    use {'L3MON4D3/LuaSnip', tag = "v2.*", run = "make install_jsregexp"}
+    use {'rafamadriz/friendly-snippets'}  -- Sample snippets
+    use {'windwp/nvim-autopairs'}
+
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
+    -- searchers
+    use {'nvim-telescope/telescope.nvim', tag = '0.1.2', requires = {{'nvim-lua/plenary.nvim'}}}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'}
+
+    -- utilities
+    use {'theprimeagen/harpoon'}
+    use {'mbbill/undotree'}
+    use {'tpope/vim-fugitive'}
+    use {"akinsho/toggleterm.nvim", tag = '*'}
+
+    -- use {"lukas-reineke/indent-blankline.nvim"}
 end)
 
