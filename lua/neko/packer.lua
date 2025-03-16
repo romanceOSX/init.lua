@@ -26,9 +26,6 @@ return require('packer').startup(function(use)
     -- snippets
     use {'L3MON4D3/LuaSnip', tag = "v2.*", run = "make install_jsregexp"}
     use {'rafamadriz/friendly-snippets'}  -- Sample snippets
-    use {'windwp/nvim-autopairs'}
-
-    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
     -- searchers
     use {'nvim-telescope/telescope.nvim', tag = '0.1.2', requires = {{'nvim-lua/plenary.nvim'}}}
@@ -39,6 +36,9 @@ return require('packer').startup(function(use)
     use {'mbbill/undotree'}
     use {'tpope/vim-fugitive'}
     use {"akinsho/toggleterm.nvim", tag = '*'}
+    use {'windwp/nvim-autopairs'}
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+
 
     -- markdown preview
     use { "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }
