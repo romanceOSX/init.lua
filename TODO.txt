@@ -108,4 +108,16 @@ ToggleTerm
     nothing is created
         v:count 0 = toggle the last terminal
 
+TODO
+    [ ] Optimize cmp configuration
+    [ ] Add latex support for math notes
+    [ ] Re-factor neovim
+    [ ] Understand lua integration better, get confident with it
+    [ ] Add a script for querying out the todo aspects 
+    [ ] Maybe try copilot configuration
+    [ ] integrate tmux with nvim
+    [ ] Integrate debuging facilities for c++ (clangd/gbd)
+    [ ] Nerdfonts? and devicons?
+    [ ] Create menu for selecting colorscehemes
+    [ ] Lua scripts for ensuring the 3rd party dependencies 
 
