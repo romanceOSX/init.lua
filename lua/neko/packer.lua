@@ -4,10 +4,10 @@ return require('packer').startup(function(use)
     use {'wbthomason/packer.nvim'}
 
     -- color themes
+    use {'sainnhe/everforest'}
     use {'Mofiqul/dracula.nvim'}
     use {'EdenEast/nightfox.nvim'}
     use {'sainnhe/sonokai'}
-    use {'sainnhe/everforest'}
 
     -- lsp
     use {'neovim/nvim-lspconfig'}
@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
     use {'theprimeagen/harpoon'}
     use {'mbbill/undotree'}
     use {'tpope/vim-fugitive'}
-    use {"akinsho/toggleterm.nvim", tag = '*'}
+    use {'akinsho/toggleterm.nvim', tag = '*'}
     use {'windwp/nvim-autopairs'}
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
 
