@@ -26,6 +26,7 @@ end
 
 local lazygit_term = Terminal:new{
     cmd = "lazygit",
+    display_name = "⏾ lazygit",
     hidden = false,
     direction = "float",
     on_open = set_terminal_keymaps_lazygit,
@@ -33,6 +34,7 @@ local lazygit_term = Terminal:new{
 
 local shell_term = Terminal:new{
     direction = "float",
+    display_name = "🦪 shell",
     on_open = set_terminal_keymaps_shell,
 }
 
@@ -45,4 +47,5 @@ shell_term:spawn()
 
 vim.keymap.set("n", [[<C-\>]], terminals.shell, {noremap = true, silent = true})
 vim.keymap.set("n", "<leader>l", terminals.lazygit, {noremap = true, silent = true})
+
 
