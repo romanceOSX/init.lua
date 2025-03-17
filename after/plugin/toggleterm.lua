@@ -21,7 +21,8 @@ end
 function _G.set_terminal_keymaps_lazygit(term)
     local opts = {buffer = 0}
     vim.keymap.set('t', [[<C-\>]], terminals.lazygit, opts)
-    vim.keymap.set('t', 'q', terminals.lazygit, opts)
+    -- can't type 'q' in commit messages
+    --vim.keymap.set('t', 'q', terminals.lazygit, opts)
 end
 
 local lazygit_term = Terminal:new{
