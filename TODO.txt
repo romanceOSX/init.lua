@@ -109,6 +109,7 @@ ToggleTerm
         v:count 0 = toggle the last terminal
 
 TODO
+    [ ] study out nvchad framework
     [ ] Optimize cmp configuration
     [ ] Add latex support for math notes
     [ ] Re-factor neovim
@@ -120,4 +121,9 @@ TODO
     [ ] Nerdfonts? and devicons?
     [ ] Create menu for selecting colorscehemes
     [ ] Lua scripts for ensuring the 3rd party dependencies 
+    [ ] add keybind for rendering types of files i.e. 
+        <leader>gx, if markdown then do :MarkDownPreview
+                    if latex file, then compile it through latex
+
+    [ ] Change packer to lazy vim plugin manager
 
