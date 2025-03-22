@@ -126,4 +126,14 @@ TODO
                     if latex file, then compile it through latex
 
     [ ] Change packer to lazy vim plugin manager
+        --> https://lazy.folke.io
+
+DEPENDENCIES
+    Dependendcies are components that need to be installed outside git, should be
+    identified so they can be scripted out during neovim config installation
+    - packer
+    - fzf
+    - node
+    - cargo
+    - python
 
