@@ -38,6 +38,11 @@ return require('packer').startup(function(use)
     use {'akinsho/toggleterm.nvim', tag = '*'}
     use {'windwp/nvim-autopairs'}
     use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+    use {'folke/todo-comments.nvim'}
+
+    -- dependencies
+    use {'nvim-lua/plenary.nvim'}
+    use {'ibhagwan/fzf-lua'}
 
     -- other
     use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }
