@@ -21,5 +21,6 @@ local function _render_file()
     renderer()
 end
 
+-- Trying to simulate the gx command in normal mode when opening links from notes and such
 vim.keymap.set("n", "<leader>gx", _render_file, {})
 

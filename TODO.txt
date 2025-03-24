@@ -128,6 +128,15 @@ TODO
     [ ] Change packer to lazy vim plugin manager
         --> https://lazy.folke.io
 
+    [ ] Add a command to view project stats:
+        - number of files
+        - time spent?
+        - number of lines?
+        - TODO list
+        - dates on first and last creation
+        - etc
+        - what do you ask about when you generally talk about a project
+
 DEPENDENCIES
     Dependendcies are components that need to be installed outside git, should be
     identified so they can be scripted out during neovim config installation
