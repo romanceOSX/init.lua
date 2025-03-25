@@ -23,7 +23,14 @@ end
 
 -- tests 
 --_print_list(_comma_split(runtimepath))
+print(vim.bo.filetype)
+print(type(vim.bo.filetype))
 
 -- vim functions
-print(vim.fn.stdpath('data'))
+--print(vim.fn.stdpath('data'))
+
+local test_string = "usr/local/test.lua"
+print(test_string)
+-- remove .tex extension
+print(test_string:sub(1, -5) .. "pdf")
 
