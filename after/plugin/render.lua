@@ -3,9 +3,12 @@ local function _markdown_render()
     vim.cmd("MarkdownPreviewToggle")
 end
 
--- TODO: call latex renderer here
 local function _latex_render()
-
+    local abs_filepath = vim.fn.expand('%:p')
+    local rel_filepath = vim.fn.expand('%:t')
+    print("Rendering tex file: " .. rel_filepath)
+    vim.fn.system{'pdflatex', rel_filepath}
+    vim.fn.system{'open', abs_filepath:sub(1, -5) .. ".pdf"}
 end
 
 -- TODO: Is there a better pattern for autoregistring these functions?
