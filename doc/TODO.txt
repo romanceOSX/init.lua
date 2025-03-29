@@ -137,6 +137,8 @@ TODO
         - etc
         - what do you ask about when you generally talk about a project
 
+    [ ] add easy way to get file size
+
 DEPENDENCIES
     Dependendcies are components that need to be installed outside git, should be
     identified so they can be scripted out during neovim config installation
@@ -145,4 +147,6 @@ DEPENDENCIES
     - node
     - cargo
     - python
+    - Ninja compiler
+    - homebrew
 
