@@ -46,7 +46,14 @@ terminals.lazygit = function() return lazygit_term:toggle() end
 lazygit_term:spawn()
 shell_term:spawn()
 
-vim.keymap.set("n", [[<C-\>]], terminals.shell, {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>l", terminals.lazygit, {noremap = true, silent = true})
+local _opts = {
+    noremap = true,
+    silent =  true,
+}
 
+vim.keymap.set("n", [[<C-\>]], terminals.shell, _opts)
+vim.keymap.set("n", "<leader>l", terminals.lazygit, _opts)
+
+-- exit terminal mode while on terminal
+vim.keymap.set('t', '<C-q>', vim.cmd.stopinsert, _opts)
 
