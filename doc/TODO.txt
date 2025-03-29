@@ -109,26 +109,26 @@ ToggleTerm
         v:count 0 = toggle the last terminal
 
 TODO
-    [ ] study out nvchad framework
-    [ ] Optimize cmp configuration
-    [ ] Add latex support for math notes
-    [ ] Re-factor neovim
-    [ ] Understand lua integration better, get confident with it
-    [ ] Add a script for querying out the todo aspects 
-    [ ] Maybe try copilot configuration
-    [ ] integrate tmux with nvim
-    [ ] Integrate debuging facilities for c++ (clangd/gbd)
-    [ ] Nerdfonts? and devicons?
-    [ ] Create menu for selecting colorscehemes
-    [ ] Lua scripts for ensuring the 3rd party dependencies 
-    [ ] add keybind for rendering types of files i.e. 
+    - TODO: study out nvchad framework
+    - TODO: Optimize cmp configuration
+    - TODO: Add latex support for math notes
+    - TODO: Re-factor neovim
+    - TODO: Understand lua integration better, get confident with it
+    - TODO: Add a script for querying out the todo aspects 
+    - TODO: Maybe try copilot configuration
+    - TODO: integrate tmux with nvim
+    - TODO: Integrate debuging facilities for c++ (clangd/gbd)
+    - TODO: Nerdfonts? and devicons?
+    - TODO: Create menu for selecting colorscehemes
+    - TODO: Lua scripts for ensuring the 3rd party dependencies 
+    - TODO: add keybind for rendering types of files i.e. 
         <leader>gx, if markdown then do :MarkDownPreview
                     if latex file, then compile it through latex
 
-    [ ] Change packer to lazy vim plugin manager
+    - TODO: Change packer to lazy vim plugin manager
         --> https://lazy.folke.io
 
-    [ ] Add a command to view project stats:
+    - TODO: Add a command to view project stats:
         - number of files
         - time spent?
         - number of lines?
@@ -137,8 +137,11 @@ TODO
         - etc
         - what do you ask about when you generally talk about a project
 
-    [ ] add easy way to get file size
+    - TODO: add easy way to get file size
 
+ISSUES
+    - FIX: <Esc> key is kinda slow for some reason
+    
 DEPENDENCIES
     Dependendcies are components that need to be installed outside git, should be
     identified so they can be scripted out during neovim config installation
