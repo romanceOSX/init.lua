@@ -47,9 +47,10 @@ vim.keymap.set('n','<leader>vh',builtin.help_tags, {})
 -- telescope-fzf-native.nvim ------------------------------------------------
 -- You dont need to set any of these options. These are the default ones. Only
 -- the loading is important
-require('telescope').setup {
+require('telescope').setup{
     defaults = {
-        layout_strategy = 'horizontal'
+        layout_strategy = 'flex',
+        --layout_config = { height = 0.95 },
     },
 
     extensions = {
@@ -62,6 +63,7 @@ require('telescope').setup {
         }
     }
 }
+
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
