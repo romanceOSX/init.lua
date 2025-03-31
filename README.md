@@ -57,6 +57,13 @@ Tools that need to installed independently from neovim
 - [ ] Packer.nvim
 - [ ] Ripgrep (for telescope grepping)
 
+## Installation
+To install this repo, clone under any location and create a symlink named 'nvim' in the user's config directory:
+```
+cd ~/.config
+# Say that you cloned the repo under a ~/git directory
+ln -s ~/git/init.lua ./nvim
+```
 ## To-Do
 - [ ] Optimize cmp engine
 - [ ] Add latex support for math notes
