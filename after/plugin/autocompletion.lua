@@ -226,6 +226,9 @@ lsp.rust_analyzer.setup {
 require("nvim-autopairs").setup{}
 
 
+-- FIX: diagnostincs 'virtual text' was not showing by default, revisit overall configuration
+vim.diagnostic.config({ virtual_text = true })
+
 -- TODO -----------------------------------------------------------------------
 -- [X] - Add cmp for search menu '/' and for cmd menu as well ':'
 -- [X] - Add cmp for cmd menu ':'
@@ -233,4 +236,5 @@ require("nvim-autopairs").setup{}
 -- [ ] - Implement a way to extend the setup keys for each of the servers 
 --       programattically, priving the server name i.e. 'clangd' and the key to
 --       edit
+
 
