@@ -45,7 +45,7 @@ return require('packer').startup(function(use)
     use {'ibhagwan/fzf-lua'}
 
     -- other
-    use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }
+    use {'iamcco/markdown-preview.nvim', run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" , "text" } end, ft = { "markdown", "text" }, }
     use {'mistricky/codesnap.nvim', run = 'make'}
 
     -- use {"lukas-reineke/indent-blankline.nvim"}
