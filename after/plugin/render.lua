@@ -14,6 +14,7 @@ end
 -- TODO: Is there a better pattern for autoregistring these functions?
 local _filetype_mapping = {
     ["markdown"] = _markdown_render,
+    ["text"] = _markdown_render, -- txt's can also be rendered by markdown
     ["tex"] = _latex_render,
     ["no_filetype"] = function () print("No render engine available") end,
 }
