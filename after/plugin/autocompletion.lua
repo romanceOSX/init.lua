@@ -204,19 +204,8 @@ vim.filetype.add({
     }
 })
 
--- Rust
-lsp.rust_analyzer.setup {
-    settings = {
-        ['rust-analyzer'] = {
-            check = {
-                command = "clippy";
-            },
-            diagnostics = {
-                enable = true;
-            }
-        }
-    }
-}
+-- rust
+lsp.rust_analyzer.setup { }
 
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
