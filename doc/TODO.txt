@@ -57,7 +57,6 @@ package.path
     These paths are only used if the .lua modules where not found
 
 package.cpath vs package.path
-
     For example, if 'runtimepath' is `foo,bar` and |package.cpath| was
     `./?.so;./?.dll` at startup, `require('mod')` searches these paths in order
     and loads the first module found ("first wins"): >
@@ -71,6 +70,7 @@ package.cpath vs package.path
         bar/lua/mod.dll
 
 Initialization
+    --> :h init.lua
     Step 7 of neovim initialization is where user config is introduced
         aka. load the init.lua
     Step 10, load plugin scripts
@@ -82,6 +82,26 @@ Initialization
             packages are loaded, they are inside an special directory 'packpath'
             same situation, nvim looks for the plugin dirs, and *after dirs are skipped
         the after/ scripts are loaded
+    
+Notes on Initialization
+    The initialization process in regards to lua runs these 3 INDEPENDENT steps
+        - run the init.lua
+        - run the plugins
+        - run the after/ plugins
+    These 3 are completely independent of each other
+    It is up to you to load anything you want during the first init pass by
+    doing require('module') at the first init.lua pass, the interesting thing to
+    note here is how lua actually searches the modules
+
+    --> :h package.path
+    It all sums up to the package.path value which tells lua where to look these
+    modules at, it is initially populated through the LUA_PATH env variable which
+    in turn has a default value defined in luaconf.h when compiling lua
+
+    --> :h lua-package-path
+    Whenever we import a module, nvim-lua looks for in the 'runtimepath' directories
+    Anytime this 'runtimepath' is changed, lua edits the package.path/cpath respecively
+    Note that for some reason, it seems that you cannot print the edite package.path
     
 Lua vimscript bridge
     Note that objects passed to vim functions are always passed by copy, meaning
