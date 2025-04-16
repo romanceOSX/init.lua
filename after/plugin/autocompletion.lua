@@ -5,7 +5,6 @@ local has_words_before = function()
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-
 -- LUASNIP --------------------------------------------------------------------
 local luasnip = require("luasnip")
 -- Load snippets provided by friendly snippets
@@ -15,7 +14,6 @@ require('luasnip.loaders.from_vscode').lazy_load()
 vim.keymap.set({"i", "s"}, "<C-k>", function () luasnip.expand() end)   -- redundant handled by cmp
 vim.keymap.set({"i", "s"}, "<C-l>", function () luasnip.expand_or_jump() end)
 vim.keymap.set({"i", "s"}, "<C-h>", function () luasnip.jump(-1) end)
-
 
 -- CMP ------------------------------------------------------------------------
 local cmp = require("cmp")
@@ -123,13 +121,11 @@ cmp.setup.cmdline(':', {
 -- This tells the lsp server that there is a snippet engine available and is
 -- able to call it from the cmp
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
--- An example to setup clangd to use nvim-cmp cpabilities
-
 
 -- MASON ----------------------------------------------------------------------
 require("mason").setup()
 require("mason-lspconfig").setup()
-
+-- TODO: ensure installed lsp servers
 
 -- LSP ------------------------------------------------------------------------
 -- Lsp servers will not be enforced by this configuration, they must be either
@@ -158,9 +154,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Language servers configuration setup calls
 -- clangd15
 --      https://clangd.llvm.org/
-lsp.clangd.setup{
-    capabilities = capabilities,
-}
+lsp.clangd.setup{}
 
 -- lua-language-server
 --      https://github.com/LuaLS/lua-language-server
@@ -205,15 +199,14 @@ vim.filetype.add({
 })
 
 -- rust
-lsp.rust_analyzer.setup { }
+lsp.rust_analyzer.setup{}
 
 -- AUTOPAIRS ------------------------------------------------------------------
 -- I'd rather configure autopairs here than in a config packer field
 require("nvim-autopairs").setup{}
 
-
 -- FIX: diagnostincs 'virtual text' was not showing by default, revisit overall configuration
-vim.diagnostic.config({ virtual_text = true })
+--vim.diagnostic.config({ virtual_text = true })
 
 -- TODO -----------------------------------------------------------------------
 -- [X] - Add cmp for search menu '/' and for cmd menu as well ':'
