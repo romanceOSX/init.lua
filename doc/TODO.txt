@@ -139,6 +139,8 @@ TODO
 
     - TODO: add easy way to get file size
 
+    - TODO: add python venv handling
+
 ISSUES
     - FIX: <Esc> key is kinda slow for some reason
     
