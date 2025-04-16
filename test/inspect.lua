@@ -13,6 +13,12 @@ local function _comma_split(str)
     return fields
 end
 
+function _pretty_print_path()
+    for path in string.gmatch(package.path, "([^;]+)") do
+        print(path)
+    end
+end
+
 local function _print_list(arg) do
     -- print each list element individually
     for _, v in pairs(arg) do
@@ -23,14 +29,17 @@ end
 
 -- tests 
 --_print_list(_comma_split(runtimepath))
-print(vim.bo.filetype)
-print(type(vim.bo.filetype))
+--print(vim.bo.filetype)
+--print(type(vim.bo.filetype))
 
 -- vim functions
 --print(vim.fn.stdpath('data'))
 
-local test_string = "usr/local/test.lua"
-print(test_string)
+--local test_string = "usr/local/test.lua"
+--print(test_string)
 -- remove .tex extension
-print(test_string:sub(1, -5) .. "pdf")
+--print(test_string:sub(1, -5) .. "pdf")
+
+print("TESTING package.path entry...")
+_pretty_print_path()
 
