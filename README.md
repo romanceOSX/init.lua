@@ -1,3 +1,4 @@
+# NOT UPDATED!!!
 # 🦄💫 init.lua
 
 Personal neovim configuration 🗣️❗️
