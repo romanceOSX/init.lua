@@ -3,4 +3,5 @@
 -- This is the 'barebones' nvim configurations
 
 require("romance.core.remaps")
+require("romance.core.set")
 
