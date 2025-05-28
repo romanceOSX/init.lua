@@ -6,6 +6,9 @@ return {
     branch = 'master',
     lazy = false,
     build = ":TSUpdate",
+
+    -- we have to call setup() manually here because lazy's require(MAIN).setup(opts) won't call
+    -- the specific tresitter config submodule
     config = function ()
         require("nvim-treesitter.configs").setup {
             -- A list of parser names, or "all" (the listed parsers MUST always be installed)
