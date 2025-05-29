@@ -4,7 +4,7 @@ end
 
 local _os = check_os()
 
-vim.opt.guicursor = ""
+--vim.opt.guicursor = ""
 
 vim.opt.nu = true
 vim.opt.rnu = true
