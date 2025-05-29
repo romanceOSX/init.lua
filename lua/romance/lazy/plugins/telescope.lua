@@ -23,7 +23,7 @@ return {
             {'<leader>ps', function()
                 builtin.grep_string({ search = vim.fn.input("Grep > ") })
             end},
-            {'n', '<leader>vh', builtin.help_tags, {}},
+            --{'n', '<leader>vh', builtin.help_tags, {}},
         }
     },
 
