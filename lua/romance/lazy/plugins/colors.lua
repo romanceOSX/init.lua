@@ -7,7 +7,7 @@ return {
     branch = "main",
     priority = 1000,
     config = function()
-        vim.cmd("colorscheme koehler")
+        vim.cmd("colorscheme lunaperche")
     end
 }
 
