@@ -1,3 +1,9 @@
+--[[
+    True color is defined as the 24-bit based coloring system, having a total of
+    2^24 color coding points, $TERM gives out this info.
+    In the case of OSX's default terminal is 8-bit color-based, meaning it is restricted
+--]]
+
 --> color module
 
 return {
