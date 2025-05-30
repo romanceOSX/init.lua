@@ -18,5 +18,12 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<leader>gb", ":buffers<CR>:buffer <Space>")
 
 -- Marks navigation
-vim.keymap.set("n", "<leader>gm", ":marks<CR> <Space>")                         -- This is wrong
+vim.keymap.set("n", "<leader>gm", ":marks<CR> <Space>") -- This is wrong
+
+-- Makes the '#' search not to move to the next occurrence
+vim.keymap.set('n', '#', function()
+        vim.fn.setreg('/', '\\<' .. vim.fn.expand('<cword>') .. '\\>')
+    end,
+    { desc = "Search current word without jumping"}
+)
 
