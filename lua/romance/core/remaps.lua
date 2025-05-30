@@ -22,6 +22,8 @@ vim.keymap.set("n", "<leader>gm", ":marks<CR> <Space>") -- This is wrong
 
 -- Makes the '#' search not to move to the next occurrence
 vim.keymap.set('n', '#', function()
+        -- enable highlight search if previously disabled by <Esc>
+        vim.opt.hls = true
         vim.fn.setreg('/', '\\<' .. vim.fn.expand('<cword>') .. '\\>')
     end,
     { desc = "Search current word without jumping"}
