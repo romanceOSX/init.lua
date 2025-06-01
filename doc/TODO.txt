@@ -175,3 +175,7 @@ DEPENDENCIES
     - Ninja compiler
     - homebrew
 
+- TODO: Add a symbol list
+    It is already provided by telescope
+    :lua require('telescope.builtin').lsp_document_symbols({ symbols='function' })
+
