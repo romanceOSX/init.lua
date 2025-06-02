@@ -29,3 +29,6 @@ vim.keymap.set('n', '#', function()
     { desc = "Search current word without jumping"}
 )
 
+-- project explore
+vim.keymap.set("n", "<leader>pe", "<cmd>Ex<CR>")
+
