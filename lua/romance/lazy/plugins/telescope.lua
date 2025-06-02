@@ -35,7 +35,7 @@ return {
         keys = {
             {'<leader>pf', builtin.find_files},
             {'<leader>fw', builtin.grep_string},
-            {'<C-p>', builtin.git_files},
+            --{'<C-p>', builtin.git_files},
             {'<leader>pws', function()
                 local word = vim.fn.expand("<cword>")
                 builtin.grep_string({ search = word })
