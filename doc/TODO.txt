@@ -179,3 +179,26 @@ DEPENDENCIES
     It is already provided by telescope
     :lua require('telescope.builtin').lsp_document_symbols({ symbols='function' })
 
+- TODO: enable python venv when launching a python project
+
+**Somehow nerdfont symbols got enabled
+
+- TODO: find a shortcut convention for calling plugins
+    - treesitter symbols 
+      buffer symbols
+    
+    - telescope symbols?
+      list symbols
+
+      <leader>ts
+
+      ff -> file find
+      fs -> file symbols
+      fg -> file grep
+
+      sf -> search file
+      sw -> search word
+      sg -> search grep
+      
+
+
