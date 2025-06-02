@@ -48,9 +48,16 @@ return {
                 builtin.grep_string({ search = vim.fn.input("Grep > ") })
             end},
             {"<leader>bl", "<cmd>Telescope buffers<CR>", { desc = "List buffers" }},
-            -- ts as for Telescope Symbols?
-            {"<leader>ts", "<cmd>Telescope aerial<CR>", { desc = "List loca-buffer symbols" }}
+            -- file symbols
+            {"<leader>fs", "<cmd>Telescope aerial<CR>", { desc = "List loca-buffer symbols" }},
+            -- file find
+            {'<leader>ff', builtin.find_files},
+            -- file grep
+            {'<leader>fg', function()
+                builtin.grep_string({ search = vim.fn.input("Grep > ") })
+            end}
             --{'n', '<leader>vh', builtin.help_tags, {}},
+            --
         }
     },
 
