@@ -119,37 +119,5 @@ return {
                 prefix = "",
             },
         })
-        local lspconfig = require("lspconfig")
-        local util = require("lspconfig.util")
-
-        lspconfig.pyright.setup({
-            before_init = function(_, config)
-                -- Automatically detect virtual environment
-                local cwd = vim.fn.getcwd()
-                local venv_python = cwd .. "/.venv/bin/python"
-                if vim.fn.executable(venv_python) == 1 then
-                    config.settings = {
-                        python = {
-                            pythonPath = venv_python,
-                        },
-                    }
-                end
-            end,
-        })
-        -- Auto-create a .venv folder if it doesn't exist
-        local function ensure_venv()
-            local venv_path = vim.fn.getcwd() .. "/.venv"
-            if vim.fn.isdirectory(venv_path) == 0 then
-                vim.notify("Creating Python virtual environment...", vim.log.levels.INFO)
-                vim.fn.system({ "python3", "-m", "venv", venv_path })
-                vim.fn.system({ venv_path .. "/bin/pip", "install", "pynvim" })
-            end
-        end
-
-        -- Hook into LspAttach or BufRead
-        vim.api.nvim_create_autocmd("BufReadPost", {
-            pattern = "*.py",
-            callback = ensure_venv,
-        })
     end
 }
