@@ -200,5 +200,5 @@ DEPENDENCIES
       sw -> search word
       sg -> search grep
       
-
+- TODO: fix the clangd indexing
 
