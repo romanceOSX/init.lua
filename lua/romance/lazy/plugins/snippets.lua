@@ -14,6 +14,9 @@ return {
         config = function()
             local ls = require("luasnip")
 
+            -- load snippets
+            require('luasnip.loaders.from_vscode').lazy_load()
+
             --- TODO: What is expand?
             vim.keymap.set({"i"}, "<C-s>e", function() ls.expand() end, {silent = true})
 
@@ -26,6 +29,9 @@ return {
                 end
             end, {silent = true})
         end,
+    },
+    {
+        'saadparwaiz1/cmp_luasnip',
     }
 }
 
