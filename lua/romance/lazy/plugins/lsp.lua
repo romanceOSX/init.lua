@@ -136,5 +136,8 @@ return {
         -- treesitter related
         vim.keymap.set("n", "<leader>tt", require('telescope.builtin').treesitter)
         vim.keymap.set("n", "<leader>ts", require('telescope.builtin').treesitter)
+
+        -- enabling swift
+        vim.lsp.enable('sourcekit')
     end
 }
