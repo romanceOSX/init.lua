@@ -1,0 +1,7 @@
+Telescope has a certain priority over certain searchers
+
+The way it executes a shell command through vim API is the following:
+    vim.fn.executable "rg"
+
+It does it through files.find_file
+
