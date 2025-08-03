@@ -34,6 +34,7 @@ return {
         },
         keys = {
             {'<leader>pf', builtin.find_files},
+            -- find word
             {'<leader>fw', builtin.grep_string},
             --{'<C-p>', builtin.git_files},
             {'<leader>pws', function()
@@ -44,9 +45,8 @@ return {
                 local word = vim.fn.expand("<cWORD>")
                 builtin.grep_string({ search = word })
             end},
-            {'<leader>ps', function()
-                builtin.grep_string({ search = vim.fn.input("Grep > ") })
-            end},
+            -- project search
+            {'<leader>ps', builtin.live_grep},
             {"<leader>bl", "<cmd>Telescope buffers<CR>", { desc = "List buffers" }},
             -- file symbols
             {"<leader>fs", "<cmd>Telescope aerial<CR>", { desc = "List loca-buffer symbols" }},
@@ -58,7 +58,9 @@ return {
             end}
             --{'n', '<leader>vh', builtin.help_tags, {}},
             --
-        }
+        },
+        -- always try to use ripgrep, it really is worth it
+        find_command = "rg"
     },
 
     {
