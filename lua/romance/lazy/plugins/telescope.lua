@@ -46,7 +46,11 @@ return {
                 builtin.grep_string({ search = word })
             end},
             -- project search
-            {'<leader>ps', builtin.live_grep},
+            {'<leader>pl', builtin.live_grep},
+            {'<leader>fl', builtin.live_grep},
+            {'<leader>ps', function()
+                builtin.grep_string({search = vim.fn.input("grep > ")})
+            end},
             {"<leader>bl", "<cmd>Telescope buffers<CR>", { desc = "List buffers" }},
             -- file symbols
             {"<leader>fs", "<cmd>Telescope aerial<CR>", { desc = "List loca-buffer symbols" }},
