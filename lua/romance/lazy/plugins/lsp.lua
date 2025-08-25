@@ -139,5 +139,69 @@ return {
 
         -- enabling swift
         vim.lsp.enable('sourcekit')
+
+        -- lsp-toggle.lua
+
+        -- Augroup name for our temporary LSP blocker
+        local LSP_DISABLE_GROUP = "LspTempDisabled"
+
+        -- Disable LSP globally
+        local function disable_lsp()
+            -- stop all running clients
+            for _, client in ipairs(vim.lsp.get_clients()) do
+                client.stop(true)
+            end
+
+            -- create a blocking autocmd so no new clients can attach
+            local grp = vim.api.nvim_create_augroup(LSP_DISABLE_GROUP, { clear = true })
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = grp,
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if client then
+                        -- detach just in case some on_attach logic already fired
+                        pcall(vim.lsp.buf_detach_client, args.buf, client.id)
+                        client.stop(true)
+                    end
+                end,
+            })
+
+            print("🔴🧠✨ LSP disabled")
+        end
+
+        -- Re-enable LSP globally
+        local function enable_lsp()
+            -- remove our blocking autocmds
+            pcall(vim.api.nvim_del_augroup_by_name, LSP_DISABLE_GROUP)
+            -- reload current buffer so the right server attaches
+            vim.cmd("edit")
+            print("🟢🧠✨ LSP enabled")
+        end
+
+        -- Expose user commands
+        vim.api.nvim_create_user_command("LspDisable", disable_lsp, {})
+        vim.api.nvim_create_user_command("LspEnable", enable_lsp, {})
+
+        -- disable lsp's hotkey
+        vim.keymap.set("n", "<leader>ll", function()
+            -- check if there is an lsp running
+            local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+            vim.g.lsp_enabled = next(clients) and true or false
+
+            if vim.g.lsp_enabled then
+                -- disable all running servers
+                for _, client in pairs(vim.lsp.get_active_clients()) do
+                    vim.lsp.stop_client(client.id)
+                    disable_lsp()
+                end
+                vim.g.lsp_enabled = false
+            else
+                -- enable lsps
+                vim.g.lsp_enabled = true
+                vim.cmd("edit")
+                enable_lsp()
+            end
+        end)
     end
 }
+
