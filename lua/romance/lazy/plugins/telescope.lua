@@ -1,5 +1,6 @@
 -- Telescope config
 
+-- TODO: fix this, if telescope is not installed, then this won't work
 local builtin = require('telescope.builtin')
 
 return {
@@ -51,17 +52,18 @@ return {
             {'<leader>ps', function()
                 builtin.grep_string({search = vim.fn.input("grep > ")})
             end},
+            -- list opened buffers
             {"<leader>bl", "<cmd>Telescope buffers<CR>", { desc = "List buffers" }},
+            {"<leader>bb", "<cmd>Telescope buffers<CR>", { desc = "List buffers" }},
             -- file symbols
-            {"<leader>fs", "<cmd>Telescope aerial<CR>", { desc = "List loca-buffer symbols" }},
+            {"<leader>fs", "<cmd>Telescope aerial<CR>", { desc = "List local-buffer symbols" }},
             -- file find
             {'<leader>ff', builtin.find_files},
             -- file grep
             {'<leader>fg', function()
                 builtin.grep_string({ search = vim.fn.input("Grep > ") })
-            end}
+            end},
             --{'n', '<leader>vh', builtin.help_tags, {}},
-            --
         },
         -- always try to use ripgrep, it really is worth it
         find_command = "rg"
