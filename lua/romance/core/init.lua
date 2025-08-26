@@ -4,4 +4,5 @@
 
 require("romance.core.remaps")
 require("romance.core.set")
+require("romance.core.diagnostics")
 
