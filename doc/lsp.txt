@@ -1,0 +1,6 @@
+vim.lsp is the lua framework for building lsp tools
+
+lsp core -> api for creating/managing clients
+lsp buf -> api for performing operations on buffer-attached clients
+
+
