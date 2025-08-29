@@ -202,3 +202,10 @@ DEPENDENCIES
       
 - TODO: fix the clangd indexing
 
+2025-08-24
+    - toggle diagnostics
+    - toggle lsp in a graceful way
+    - jump between snippets nodes
+    - fix telescope lazy initialization
+    - learn how to create menus for turning settings on and off (such as lsp's)
+
