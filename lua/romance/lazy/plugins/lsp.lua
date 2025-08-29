@@ -18,18 +18,6 @@ return {
     },
 
     config = function()
-        require("conform").setup({
-            formatters_by_ft = {
-            }
-        })
-        local cmp = require('cmp')
-        local cmp_lsp = require("cmp_nvim_lsp")
-        local capabilities = vim.tbl_deep_extend(
-            "force",
-            {},
-            vim.lsp.protocol.make_client_capabilities(),
-            cmp_lsp.default_capabilities())
-
         require("fidget").setup({})
         require("mason").setup()
         require("mason-lspconfig").setup({
@@ -85,6 +73,20 @@ return {
             }
         })
 
+        require("conform").setup({
+            formatters_by_ft = {
+            }
+        })
+
+        local cmp = require('cmp')
+        local cmp_lsp = require("cmp_nvim_lsp")
+        local capabilities = vim.tbl_deep_extend(
+            "force",
+            {},
+            vim.lsp.protocol.make_client_capabilities(),
+            cmp_lsp.default_capabilities())
+
+
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
         cmp.setup({
@@ -137,10 +139,9 @@ return {
         vim.keymap.set("n", "<leader>tt", require('telescope.builtin').treesitter)
         vim.keymap.set("n", "<leader>ts", require('telescope.builtin').treesitter)
 
-        -- enabling swift
-        vim.lsp.enable('sourcekit')
-
+        --
         -- lsp-toggle.lua
+        --
 
         -- Augroup name for our temporary LSP blocker
         local LSP_DISABLE_GROUP = "LspTempDisabled"
