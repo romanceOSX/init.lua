@@ -1,5 +1,6 @@
 vim.diagnostic.config({
-    --virtual_text = true,
+    -- TODO: should I enable virtual_text?
+    virtual_text = false,
     -- update_in_insert = true,
     float = {
         focusable = false,
