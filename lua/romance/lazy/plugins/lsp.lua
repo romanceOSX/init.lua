@@ -125,19 +125,6 @@ return {
             end
         end, {silent = true})
 
-        vim.diagnostic.config({
-            virtual_text = true,
-            -- update_in_insert = true,
-            float = {
-                focusable = false,
-                style = "minimal",
-                border = "rounded",
-                source = "always",
-                header = "",
-                prefix = "",
-            },
-        })
-
         -- lsp related
         vim.keymap.set("n", "<leader>ls", require('telescope.builtin').lsp_workspace_symbols)
         vim.keymap.set("n", "<leader>lr", require('telescope.builtin').lsp_references)
