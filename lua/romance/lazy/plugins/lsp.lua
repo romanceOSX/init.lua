@@ -125,19 +125,17 @@ return {
             end
         end, {silent = true})
 
+        local fzf = require("fzf-lua")
+
         -- lsp related
-        vim.keymap.set("n", "<leader>ls", require('telescope.builtin').lsp_workspace_symbols)
-        vim.keymap.set("n", "<leader>lr", require('telescope.builtin').lsp_references)
+        vim.keymap.set("n", "<leader>ls", fzf.lsp_workspace_symbols)
+        vim.keymap.set("n", "<leader>lr", fzf.lsp_references)
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
         vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration)
         vim.keymap.set("n", "<leader>lD", vim.lsp.buf.definition)
         vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation)
         vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition)
         vim.keymap.set("n", "<leader>lc", vim.lsp.buf.incoming_calls)
-
-        -- treesitter related
-        vim.keymap.set("n", "<leader>tt", require('telescope.builtin').treesitter)
-        vim.keymap.set("n", "<leader>ts", require('telescope.builtin').treesitter)
 
         --
         -- lsp-toggle.lua

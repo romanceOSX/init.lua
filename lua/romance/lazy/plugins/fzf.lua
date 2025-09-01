@@ -5,9 +5,20 @@ return {
     -- or if using mini.icons/mini.nvim
     -- dependencies = { "nvim-mini/mini.icons" },
     opts = {},
-    config = function(plug, table)
+    config = function(plug, opts)
         local fzf = require("fzf-lua")
-        vim.keymap.set("n", '<leader>pf', fzf.files)
+
+        -- keymaps
+        vim.keymap.set("n", "<leader>pf", fzf.files)
+        vim.keymap.set("n", "<leader>ff", fzf.files)
+        vim.keymap.set("n", "<leader>bb", fzf.buffers)
+        -- TODO: add visual mode highlight grep capabilities to this command
+        vim.keymap.set("n", "<leader>fw", fzf.grep_cword)
+        vim.keymap.set("v", "<leader>fw", fzf.grep_visual)
+        vim.keymap.set("n", "<leader>ps", fzf.grep)
+        vim.keymap.set("n", "<leader>fs", fzf.treesitter)
+        vim.keymap.set("n", "<leader>fp", fzf.git_files)
+        vim.keymap.set("n", "<leader>fg", fzf.git_files)
     end
 }
 
