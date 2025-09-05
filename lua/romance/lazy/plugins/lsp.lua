@@ -3,6 +3,7 @@
 
 return {
     "neovim/nvim-lspconfig",
+    name = "lspconfig",
     dependencies = {
         "stevearc/conform.nvim",
         "williamboman/mason.nvim",
@@ -125,11 +126,7 @@ return {
             end
         end, {silent = true})
 
-        local fzf = require("fzf-lua")
-
         -- lsp related
-        vim.keymap.set("n", "<leader>ls", fzf.lsp_workspace_symbols)
-        vim.keymap.set("n", "<leader>lr", fzf.lsp_references)
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
         vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration)
         vim.keymap.set("n", "<leader>lD", vim.lsp.buf.definition)
