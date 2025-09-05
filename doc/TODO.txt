@@ -209,3 +209,9 @@ DEPENDENCIES
     - fix telescope lazy initialization
     - learn how to create menus for turning settings on and off (such as lsp's)
 
+2025-09-05
+    - migration to fzf-lua works on macos but it is painfully slow to load on windows
+      it also feels that telescope is way snappier, for now I will disable it
+        - as an alternative I will use telescope's fzf-native addition
+    - TODO: test on clean docker image or VM for clean installation
+
