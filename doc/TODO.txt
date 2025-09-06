@@ -214,4 +214,7 @@ DEPENDENCIES
       it also feels that telescope is way snappier, for now I will disable it
         - as an alternative I will use telescope's fzf-native addition
     - TODO: test on clean docker image or VM for clean installation
+    - TODO: telescope-fzf-native seems to output the dll in different places,
+            maybe the CMake project is not explicitly declaring where to do so
+            This fails for windows
 
