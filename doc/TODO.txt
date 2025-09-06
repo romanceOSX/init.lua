@@ -218,3 +218,9 @@ DEPENDENCIES
             maybe the CMake project is not explicitly declaring where to do so
             This fails for windows
 
+2025-09-05
+    - TODO: understand autocommands and events
+
+Lefft off here
+    - cleanup and add cmp sources correctly
+        --> https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
