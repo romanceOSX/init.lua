@@ -6,7 +6,7 @@ return {
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.8',
+        'nvim-telescope/telescope.nvim', commit = "b4da76b",
         name = "telescope",
         enabled = true,
         dependencies = {
@@ -54,7 +54,9 @@ return {
             vim.keymap.set("n", "<leader>ff", builtin.find_files)
             vim.keymap.set("n", "<leader>bb", builtin.buffers)
             vim.keymap.set({"n", "v"}, "<leader>fw", builtin.grep_string)
-            --vim.keymap.set("n", "<leader>ps", fzf.grep)
+            vim.keymap.set("n", "<leader>ps", function ()
+                builtin.grep_string{ search = vim.fn.input({ prompt = "🔎 Grep > "})}
+            end)
 
             -- treesitter
             vim.keymap.set("n", "<leader>fs", builtin.treesitter)
@@ -73,6 +75,7 @@ return {
 
             -- telescope
             vim.keymap.set("n", "<leader>tt", builtin.builtin)
+            vim.keymap.set("n", "<leader>tp", builtin.builtin)  -- 'tp' as in 'telescope picker'
         end
     }
 }
