@@ -1,16 +1,17 @@
 return {
     "hrsh7th/nvim-cmp",
-    name = "cmp",
     enabled = true,
     dependencies = {
         "L3MON4D3/LuaSnip",
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-path", -- TODO: set cmp path
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
     },
+    lazy = true,
+    event = "InsertEnter",
     opts = {
         experimental = {
             ghost_text = true,

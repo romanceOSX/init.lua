@@ -1,3 +1,5 @@
+-- TODO: create the config and key tables outside the return
+
 return {
     {
         'romanceOSX/telescope-fzf-native.nvim',

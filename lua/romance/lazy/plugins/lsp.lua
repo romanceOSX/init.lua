@@ -10,6 +10,8 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
     },
+    lazy = true,
+    event = "VeryLazy", -- latests events within Neovim's startup
     config = function()
         require("conform").setup({
             formatters_by_ft = {
