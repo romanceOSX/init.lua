@@ -10,7 +10,7 @@ RUN git clone https://github.com/neovim/neovim
 RUN cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && make install
 
 # nvim config pull
-RUN git clone https://github.com/romanceOSX/init.lua.git ~/.config/nvim
+COPY ./ /root/.config/nvim
 
 CMD ["nvim"]
 
