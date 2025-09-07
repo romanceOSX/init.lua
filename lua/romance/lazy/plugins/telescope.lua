@@ -12,8 +12,8 @@ return {
         name = "telescope",
         enabled = true,
         dependencies = {
-            'treesitter',
-            'lspconfig',
+            "nvim-treesitter/nvim-treesitter",
+            "neovim/nvim-lspconfig",
             'telescope-fzf-native',
             'nvim-lua/plenary.nvim',
         },
