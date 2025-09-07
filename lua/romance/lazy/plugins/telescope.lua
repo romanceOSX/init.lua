@@ -2,7 +2,7 @@
 
 return {
     {
-        'romanceOSX/telescope-fzf-native.nvim',
+        "romanceOSX/telescope-fzf-native.nvim",
         lazy = true,
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
@@ -12,8 +12,8 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
             "neovim/nvim-lspconfig",
-            'telescope-fzf-native',
-            'nvim-lua/plenary.nvim',
+            "romanceOSX/telescope-fzf-native.nvim",
+            "nvim-lua/plenary.nvim"
         },
         opts = {
             defaults = {

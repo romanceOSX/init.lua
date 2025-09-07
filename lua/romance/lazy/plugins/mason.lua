@@ -11,7 +11,9 @@ return {
                     package_uninstalled = "✗"
                 }
             }
-        }
+        },
+        lazy = true,
+        cmd = "Mason",
     },
     -- provides lsp autoconfiguration from the Mason-provided servers
     {
@@ -32,8 +34,6 @@ return {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",
         },
-        lazy = true,
-        cmd = "Mason",
     }
 }
 
