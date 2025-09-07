@@ -1,7 +1,6 @@
 return {
     "ibhagwan/fzf-lua",
     -- optional for icon support
-    name = "fzf",
     enabled = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- or if using mini.icons/mini.nvim

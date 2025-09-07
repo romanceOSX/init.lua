@@ -3,13 +3,11 @@
 return {
     {
         'romanceOSX/telescope-fzf-native.nvim',
-        name = "telescope-fzf-native",
         lazy = true,
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
     {
         'nvim-telescope/telescope.nvim', commit = "b4da76b",
-        name = "telescope",
         enabled = true,
         dependencies = {
             "nvim-treesitter/nvim-treesitter",

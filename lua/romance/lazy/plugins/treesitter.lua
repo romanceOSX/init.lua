@@ -4,9 +4,8 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        name = "treesitter",
-        branch = 'master',
         lazy = true,
+        branch = 'master',
         build = ":TSUpdate",
 
         -- we have to call setup() manually here because lazy's require(MAIN).setup(opts) won't call
@@ -68,7 +67,6 @@ return {
             }
         end
     },
-
     {
         "nvim-treesitter/nvim-treesitter-context",
         dependencies = "nvim-treesitter/nvim-treesitter",
