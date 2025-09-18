@@ -64,13 +64,13 @@ return {
         lazy = false,
         config = function()
             vim.opt.background = "dark" -- or "light"
-            vim.cmd('colorscheme sakura') -- sets the colorscheme
             vim.cmd [[
               highlight Normal guibg=none
               highlight NonText guibg=none
               highlight Normal ctermbg=none
               highlight NonText ctermbg=none
             ]]
+            vim.cmd('colorscheme everforest') -- sets the colorscheme
         end
     },
 }
