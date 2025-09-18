@@ -9,7 +9,7 @@
 return {
     {
         "sainnhe/everforest",
-        enabled = false,
+        enabled = true,
         config = function ()
             vim.g.everforest_background = 'medium'
             vim.g.everforest_better_performance = 1
@@ -22,7 +22,7 @@ return {
     {
         'matsuuu/pinkmare',
         lazy = false,
-        enabled = false,
+        enabled = true,
         priority = 1000,
         init = function ()
             vim.opt.termguicolors = true
@@ -32,7 +32,7 @@ return {
             vim.g.pinkmare_palette = {
                 bg_green = {"#1e25eb", "22", "DarkGreen"},
             }
-            vim.cmd.colorscheme("pinkmare")
+            --vim.cmd.colorscheme("pinkmare")
         end,
     },
     {
@@ -54,7 +54,7 @@ return {
         },
         config = function(plugin, opts)
             require("nightblossom").setup(opts)
-            vim.cmd("colorscheme nightblossom-pastel")
+            --vim.cmd("colorscheme nightblossom-pastel")
         end,
     },
     {
