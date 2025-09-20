@@ -57,6 +57,7 @@ return {
             vim.keymap.set("n", "<leader>ps", function ()
                 builtin.grep_string{ search = vim.fn.input({ prompt = "🔎 Grep > "})}
             end)
+            vim.keymap.set("n", "<leader>mm", builtin.marks)
 
             -- treesitter
             vim.keymap.set("n", "<leader>fs", builtin.treesitter)
