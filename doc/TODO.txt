@@ -221,6 +221,20 @@ DEPENDENCIES
 2025-09-05
     - TODO: understand autocommands and events
 
+Check out this nvim config  
+    --> https://github.com/catgoose/nvim/tree/main
+
+Check out their tmux as well
+    --> https://github.com/catgoose/kanagawa-tmux
+
 Lefft off here
     - cleanup and add cmp sources correctly
         --> https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+
+neoconf
+    --> https://github.com/folke/neoconf.nvim
+
+2025-09-19
+    TODO: create a selective colorscheme, say apply X colorsheme if I am in a certain folder
+          maybe apply this colorscheme per buffer?, try doing this through autocommands
+
