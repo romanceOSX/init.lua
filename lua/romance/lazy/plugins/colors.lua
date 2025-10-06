@@ -58,20 +58,12 @@ return {
         end,
     },
     {
-        "anAcc22/sakura.nvim",
-        dependencies = "rktjmp/lush.nvim",
-        enabled = true,
+        "wtfox/jellybeans.nvim",
         lazy = false,
-        config = function()
-            vim.opt.background = "dark" -- or "light"
-            vim.cmd [[
-              highlight Normal guibg=none
-              highlight NonText guibg=none
-              highlight Normal ctermbg=none
-              highlight NonText ctermbg=none
-            ]]
-            vim.cmd('colorscheme everforest') -- sets the colorscheme
-        end
+        priority = 1000,
+        opts = {
+            transparent = true,
+        }, -- Optional
     },
 }
 
