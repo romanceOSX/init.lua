@@ -1,0 +1,10 @@
+--> :h coloring
+
+set background / light-dark
+set 
+
+Syntax groups, get mapped into highlight groups, such highlight groups specify
+the coloring
+
+// skldfj
+    

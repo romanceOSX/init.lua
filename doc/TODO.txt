@@ -238,3 +238,6 @@ neoconf
     TODO: create a selective colorscheme, say apply X colorsheme if I am in a certain folder
           maybe apply this colorscheme per buffer?, try doing this through autocommands
 
+- TODO: make sakura its own standalone colorscheme repo
+- TODO: change colorscheme on demand depending on filetypes
+
