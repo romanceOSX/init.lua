@@ -54,10 +54,15 @@ local dark = {
     vs0 = hsluv(310, 12, 20),
     vs1 = hsluv(310, 6, 12),
 
+    --fg0 = hsluv(0, 60, 80),
+    --fg1 = hsluv(0, 60, 70),
+    --fg8 = hsluv(0, 60, 65),
+    --fg9 = hsluv(4, 50, 55),
+
     fg0 = hsluv(0, 25, 80),
-    fg1 = hsluv(0, 25, 70),
+    fg1 = hsluv("#88b595"),
     fg8 = hsluv(0, 15, 65),
-    fg9 = hsluv(0, 10, 55),
+    fg9 = hsluv("#e383b2"),
 
     er0 = hsluv(7, 55, 50),
     er9 = hsluv(7, 55, 20),
