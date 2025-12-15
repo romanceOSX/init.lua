@@ -32,6 +32,7 @@ return {
 
         -- lsp related
         vim.keymap.set("n", "<leader>lR", vim.lsp.buf.rename)
+        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references)
         vim.keymap.set("n", "<leader>ld", vim.lsp.buf.declaration)
         vim.keymap.set("n", "<leader>lD", vim.lsp.buf.definition)
         vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation)

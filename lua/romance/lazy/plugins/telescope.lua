@@ -64,6 +64,7 @@ return {
 
             -- lsp
             vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
+            vim.keymap.set("n", "<leader>li", builtin.lsp_incoming_calls)
             vim.keymap.set("n", "<leader>ls", builtin.lsp_workspace_symbols)
             vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions)
 
