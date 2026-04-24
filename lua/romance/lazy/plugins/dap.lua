@@ -6,6 +6,7 @@ return {
         "mfussenegger/nvim-dap",
         dependencies = {
             "rcarriga/nvim-dap-ui",
+            "mason-org/mason.nvim",
             "theHamsta/nvim-dap-virtual-text",
         },
         config = function()
