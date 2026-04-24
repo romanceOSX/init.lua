@@ -57,5 +57,5 @@ vim.keymap.set("n", "<leader>gt", terminals.lazygit, _opts)
 vim.keymap.set("n", "<leader>gg", terminals.lazygit, _opts)
 
 -- exit terminal mode while on terminal
-vim.keymap.set('t', '<C-q>', vim.cmd.stopinsert, _opts)
+vim.keymap.set({'t', 'i', 'n', 'v'}, '<C-q>', vim.cmd.stopinsert, _opts)
 
