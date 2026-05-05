@@ -15,10 +15,67 @@ return {
     config = function()
         require("conform").setup({
             formatters_by_ft = {
-            }
+                lua    = { "stylua" },
+                python = { "black", "isort" },
+                rust   = { "rustfmt" },
+                c      = { "clang_format" },
+                cpp    = { "clang_format" },
+            },
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
         })
 
         require("fidget").setup({})
+
+        -- Broadcast nvim-cmp capabilities to all LSP servers
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        vim.lsp.config('*', { capabilities = capabilities })
+
+        -- lua_ls: teach it about the Neovim runtime
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    runtime = { version = 'LuaJIT' },
+                    diagnostics = { globals = { 'vim' } },
+                    workspace = {
+                        library = vim.api.nvim_get_runtime_file("", true),
+                        checkThirdParty = false,
+                    },
+                    telemetry = { enable = false },
+                },
+            },
+        })
+
+        -- pyright: basic type checking
+        vim.lsp.config('pyright', {
+            settings = {
+                python = {
+                    analysis = {
+                        typeCheckingMode = 'basic',
+                        autoSearchPaths = true,
+                        useLibraryCodeForTypes = true,
+                    },
+                },
+            },
+        })
+
+        -- clangd: background indexing + clang-tidy
+        vim.lsp.config('clangd', {
+            cmd = { 'clangd', '--background-index', '--clang-tidy', '--header-insertion=iwyu' },
+        })
+
+        -- rust_analyzer: clippy on save + all features
+        vim.lsp.config('rust_analyzer', {
+            settings = {
+                ['rust-analyzer'] = {
+                    cargo = { allFeatures = true },
+                    checkOnSave = { command = 'clippy' },
+                    inlayHints = { enable = true },
+                },
+            },
+        })
 
         local ls = require("luasnip")
         vim.keymap.set({"i"}, "<C-K>", function() ls.expand() end, {silent = true})

@@ -3,10 +3,10 @@
 -- TODO: move this to its lazy place
 
 -- only to set up autocommands
-require("toggleterm").setup{ }
+require("toggleterm").setup {}
 
 -- mapping between terminal names and their terminal objects
-local terminals = { }
+local terminals = {}
 
 -- lazygit toggle terminal
 local Terminal  = require('toggleterm.terminal').Terminal
@@ -15,18 +15,18 @@ local Terminal  = require('toggleterm.terminal').Terminal
 -- note that there shouldn't be any mappings with <leader> on terminal mode
 -- otherwise you won't be able to type properly
 function _G.set_terminal_keymaps_shell(term)
-    local opts = {buffer = 0}
+    local opts = { buffer = 0 }
     vim.keymap.set('t', [[<C-\>]], terminals.shell, opts)
 end
 
 function _G.set_terminal_keymaps_lazygit(term)
-    local opts = {buffer = 0}
+    local opts = { buffer = 0 }
     vim.keymap.set('t', [[<C-\>]], terminals.lazygit, opts)
     -- can't type 'q' in commit messages
     --vim.keymap.set('t', 'q', terminals.lazygit, opts)
 end
 
-local lazygit_term = Terminal:new{
+local lazygit_term = Terminal:new {
     cmd = "lazygit",
     display_name = "⏾ lazygit",
     hidden = false,
@@ -34,28 +34,40 @@ local lazygit_term = Terminal:new{
     on_open = set_terminal_keymaps_lazygit,
 }
 
-local shell_term = Terminal:new{
+local shell_term   = Terminal:new {
     direction = "float",
     display_name = "🦪 shell",
     on_open = set_terminal_keymaps_shell,
 }
 
-terminals.shell = function() return shell_term:toggle() end
-terminals.lazygit = function() return lazygit_term:toggle() end
+local copilot_term = Terminal:new {
+    cmd = "copilot",
+    display_name = "🤖 copilot",
+    hidden = false,
+    direction = "float",
+    on_open = function(term)
+        local opts = { buffer = 0 }
+        vim.keymap.set('t', [[<C-\>]], terminals.copilot, opts)
+    end,
+}
+
+terminals.shell    = function() return shell_term:toggle() end
+terminals.lazygit  = function() return lazygit_term:toggle() end
+terminals.copilot  = function() return copilot_term:toggle() end
 
 -- spawn processes
-lazygit_term:spawn()
 shell_term:spawn()
+copilot_term:spawn()
 
 local _opts = {
     noremap = true,
-    silent =  true,
+    silent = true,
 }
 
 vim.keymap.set("n", [[<C-\>]], terminals.shell, _opts)
 vim.keymap.set("n", "<leader>gt", terminals.lazygit, _opts)
 vim.keymap.set("n", "<leader>gg", terminals.lazygit, _opts)
+vim.keymap.set("n", "<leader>c", terminals.copilot, _opts)
 
 -- exit terminal mode while on terminal
-vim.keymap.set({'t', 'i', 'n', 'v'}, '<C-q>', vim.cmd.stopinsert, _opts)
-
+vim.keymap.set('t', '<C-q>', vim.cmd.stopinsert, _opts)

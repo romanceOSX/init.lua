@@ -16,12 +16,14 @@ return {
                 ensure_installed = {
                     "c",
                     "cpp",
+                    "rust",
+                    "python",
                     "lua",
                     "vim",
                     "vimdoc",
                     "query",
                     "markdown",
-                    "markdown_inline"
+                    "markdown_inline",
                 },
 
                 -- Install parsers synchronously (only applied to `ensure_installed`)

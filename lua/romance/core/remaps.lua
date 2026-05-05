@@ -32,5 +32,3 @@ vim.keymap.set('n', '#', function()
 -- project explore
 vim.keymap.set("n", "<leader>pe", "<cmd>Ex<CR>")
 
--- keyboard convenience 
-
