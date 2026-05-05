@@ -73,8 +73,22 @@ return {
                     cargo = { allFeatures = true },
                     checkOnSave = { command = 'clippy' },
                     inlayHints = { enable = true },
+                    -- Use server-side file watching (fixes external edits not being detected)
+                    files = { watcher = 'server' },
+                    -- Automatically discover new files and modules
+                    workspace = { discoverConfig = 'command' },
                 },
             },
+        })
+
+        -- Reload rust-analyzer workspace when new files are created
+        vim.api.nvim_create_autocmd("BufNewFile", {
+            pattern = "*.rs",
+            callback = function()
+                for _, client in ipairs(vim.lsp.get_clients({ name = "rust_analyzer" })) do
+                    client:request("rust-analyzer/reloadWorkspace", nil, function() end, 0)
+                end
+            end,
         })
 
         local ls = require("luasnip")
