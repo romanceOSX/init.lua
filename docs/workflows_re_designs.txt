@@ -1,0 +1,34 @@
+This document serves as a discussion for re-defining the current neovim workflows
+
+//
+// Terminal Workflow
+//
+
+Currently I use the terminal inside neovim, it is nice because it is a really direct approach and my terminal
+spawns in my project's root folder automatically
+
+Upsides
+    - direct and easy to spawn
+    - quick shortcuts to jump back into editing and typing terminal commands
+    - integrated
+    - I might be missing more
+
+Downsides
+    - Terminal gets lost if neovim closes
+    - hard to manage multiple tasks
+    - I might be missing more
+
+I want to know what are the current best approaches to people working with terminals
+I have seen people using just a separate shell through tmux
+
+//
+// aerial workflow
+//
+
+TODO: set up aerial and its keymaps
+I believe there is fzf integration for this
+
+//
+// Markdown
+//
+
