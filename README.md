@@ -156,3 +156,4 @@ Active scheme: `sakura` (set in `after/plugin/colors.lua`)
 | `<C-L>` | Jump forward |
 | `<C-J>` | Jump backward |
 
+
