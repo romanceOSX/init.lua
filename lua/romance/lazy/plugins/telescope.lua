@@ -7,7 +7,8 @@ return {
         build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
     },
     {
-        'nvim-telescope/telescope.nvim', commit = "b4da76b",
+        'nvim-telescope/telescope.nvim',
+        commit = "b4da76b",
         enabled = true,
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
@@ -32,15 +33,15 @@ return {
             },
             extensions = {
                 fzf = {
-                    fuzzy = true,                    -- false will only do exact matching
-                    override_generic_sorter = true,  -- override the generic sorter
-                    override_file_sorter = true,     -- override the file sorter
-                    case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                    fuzzy = true,                   -- false will only do exact matching
+                    override_generic_sorter = true, -- override the generic sorter
+                    override_file_sorter = true,    -- override the file sorter
+                    case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
                     -- the default case_mode is "smart_case"
                 }
             }
         },
-        config = function (plugin, opts)
+        config = function(plugin, opts)
             --- telescope init ---
             local telescope = require("telescope")
             telescope.setup(opts)
@@ -49,13 +50,19 @@ return {
             --- keymaps ---
             local builtin = require("telescope.builtin")
 
+            -- Help menu
+            vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+            -- Buffers
+            vim.keymap.set("n", "<leader>b", builtin.buffers)
+            vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+
             -- files
             vim.keymap.set("n", "<leader>pf", builtin.find_files)
             vim.keymap.set("n", "<leader>ff", builtin.find_files)
-            vim.keymap.set("n", "<leader>bb", builtin.buffers)
-            vim.keymap.set({"n", "v"}, "<leader>fw", builtin.grep_string)
-            vim.keymap.set("n", "<leader>ps", function ()
-                builtin.grep_string{ search = vim.fn.input({ prompt = "🔎 Grep > "})}
+            vim.keymap.set({ "n", "v" }, "<leader>fw", builtin.grep_string)
+            vim.keymap.set("n", "<leader>ps", function()
+                builtin.grep_string { search = vim.fn.input({ prompt = "🔎 Grep > " }) }
             end)
             vim.keymap.set("n", "<leader>mm", builtin.marks)
 
@@ -77,8 +84,7 @@ return {
 
             -- telescope
             vim.keymap.set("n", "<leader>tt", builtin.builtin)
-            vim.keymap.set("n", "<leader>tp", builtin.builtin)  -- 'tp' as in 'telescope picker'
+            vim.keymap.set("n", "<leader>tp", builtin.builtin) -- 'tp' as in 'telescope picker'
         end
     }
 }
-
