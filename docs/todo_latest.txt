@@ -1,0 +1,7 @@
+// Focus-on window keybinding
+I would like to focus on a window when hitting '<leader>z' similar to tmux's pane focus toggle
+I would like this to be a native lua script, not from a dependency as it currently is
+Ideally I would like it not to take the 'tabs' approach, instead track the current opened buffers and window
+layout, then <C-w> + O on the focused one, when hitting <leader>z again I want to be able to return back to
+the original layout somehow.
+
