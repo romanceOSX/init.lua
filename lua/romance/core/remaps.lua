@@ -8,7 +8,7 @@ vim.keymap.set('i','<C-c>','<Esc>')
 -- Clear Highlights
 
 vim.keymap.set("n", "<Esc>", "<cmd> noh <CR>")
---- vim.keymap.set('n','<C-f>',"<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set('n','<C-f>',"<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- move blocks of lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -31,4 +31,16 @@ vim.keymap.set('n', '#', function()
 
 -- project explore
 vim.keymap.set("n", "<leader>pe", "<cmd>Ex<CR>")
+
+-- zoom current window (tab split toggles full screen, tabclose restores layout)
+local _zoomed = false
+vim.keymap.set("n", "<leader>z", function()
+    if _zoomed then
+        vim.cmd("tabclose")
+        _zoomed = false
+    else
+        vim.cmd("tab split")
+        _zoomed = true
+    end
+end, { desc = "Zoom window" })
 
