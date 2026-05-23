@@ -32,15 +32,7 @@ vim.keymap.set('n', '#', function()
 -- project explore
 vim.keymap.set("n", "<leader>pe", "<cmd>Ex<CR>")
 
--- zoom current window (tab split toggles full screen, tabclose restores layout)
-local _zoomed = false
 vim.keymap.set("n", "<leader>z", function()
-    if _zoomed then
-        vim.cmd("tabclose")
-        _zoomed = false
-    else
-        vim.cmd("tab split")
-        _zoomed = true
-    end
+    require("romance.utils.window").zoom_toggle()
 end, { desc = "Zoom window" })
 

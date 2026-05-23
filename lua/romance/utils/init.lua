@@ -1,3 +1,3 @@
--- module for general purpose functions
-
-
+return {
+    window = require("romance.utils.window"),
+}
