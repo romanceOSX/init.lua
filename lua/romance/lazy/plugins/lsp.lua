@@ -71,12 +71,9 @@ return {
             settings = {
                 ['rust-analyzer'] = {
                     cargo = { allFeatures = true },
-                    checkOnSave = { command = 'clippy' },
+                    check = { command = 'clippy' },
                     inlayHints = { enable = true },
-                    -- Use server-side file watching (fixes external edits not being detected)
                     files = { watcher = 'server' },
-                    -- Automatically discover new files and modules
-                    workspace = { discoverConfig = 'command' },
                 },
             },
         })
