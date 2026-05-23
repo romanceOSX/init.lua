@@ -15,7 +15,7 @@ return {
         dir = "git_dir",
         float_opts = {
             border = "curved",
-            winblend = 5,
+            winblend = 0,
         },
         -- keep terminal hidden rather than closed so state persists
         hide_numbers = true,

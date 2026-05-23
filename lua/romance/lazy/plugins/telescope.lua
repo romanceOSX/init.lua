@@ -60,6 +60,9 @@ return {
             -- files
             vim.keymap.set("n", "<leader>pf", builtin.find_files)
             vim.keymap.set("n", "<leader>ff", builtin.find_files)
+            vim.keymap.set("n", "<leader>pF", function()
+                builtin.find_files({ hidden = true, no_ignore = true })
+            end)
             vim.keymap.set({ "n", "v" }, "<leader>fw", builtin.grep_string)
             vim.keymap.set("n", "<leader>ps", function()
                 builtin.grep_string { search = vim.fn.input({ prompt = "🔎 Grep > " }) }
