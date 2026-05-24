@@ -1,17 +1,15 @@
 return {
-  {
-    "goolord/alpha-nvim",
-    -- dependencies = { 'echasnovski/mini.icons' },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      local startify = require("alpha.themes.startify")
-      -- available: devicons, mini, default is mini
-      -- if provider not loaded and enabled is true, it will try to use another provider
-      startify.file_icons.provider = "devicons"
-      require("alpha").setup(
-        startify.config
-      )
-    end,
-  },
-}
+    {
+        "goolord/alpha-nvim",
+        -- dependencies = { 'echasnovski/mini.icons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+            local dashboard = require('alpha.themes.dashboard')
 
+            local header_path = vim.fn.fnamemodify(debug.getinfo(1, "S").source:sub(2), ":h") .. "/greeter.txt"
+            dashboard.section.header.val = vim.fn.readfile(header_path)
+
+            require('alpha').setup(dashboard.config)
+        end
+    },
+}
