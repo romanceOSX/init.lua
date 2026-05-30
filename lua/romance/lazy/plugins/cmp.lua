@@ -6,7 +6,7 @@ return {
         "neovim/nvim-lspconfig",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path", -- TODO: set cmp path
+        "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "saadparwaiz1/cmp_luasnip",
     },
@@ -32,8 +32,9 @@ return {
         -- set cmp sources
         opts.sources = cmp.config.sources({  -- this declares the display order
             { name = 'luasnip' },
-            { name = 'buffer' },
             { name = 'nvim_lsp' },
+            { name = 'path' },
+            { name = 'buffer' },
         })
 
         -- `/` cmdline setup.
