@@ -6,8 +6,6 @@ return {
     dependencies = {
         "L3MON4D3/LuaSnip",
         "stevearc/conform.nvim",
-        "williamboman/mason.nvim",
-        "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
     },
     lazy = true,
