@@ -1,1 +1,0 @@
--- moved to lua/romance/lazy/plugins/terminal.lua
