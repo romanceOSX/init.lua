@@ -41,5 +41,6 @@ return {
 	keys = {
 		{ "<leader>gx", render_file, {} },
 		{ "<leader>fx", render_file, {} },
+		{ "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
 	},
 }

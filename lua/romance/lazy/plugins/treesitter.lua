@@ -1,74 +1,57 @@
--- treesitter plugin
+-- treesitter plugin — main branch (the Neovim 0.12 rewrite)
 --> https://github.com/nvim-treesitter/nvim-treesitter
+--
+-- The old `master` branch is frozen and breaks on nvim 0.12 (e.g. the
+-- treesitter-context "range (a nil value)" error in markdown). `main` is a full
+-- rewrite: it compiles parsers locally via the tree-sitter CLI (installed in
+-- dotfiles/home/packages.nix) and no longer auto-enables highlight/indent —
+-- those are turned on per-buffer below. There is no nvim-treesitter.configs.
+
+local parsers = {
+    "c",
+    "cpp",
+    "rust",
+    "python",
+    "lua",
+    "vim",
+    "vimdoc",
+    "query",
+    "markdown",
+    "markdown_inline",
+    "xml",
+}
 
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        lazy = true,
-        branch = 'master',
+        lazy = false,
+        branch = "main",
         build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter").setup()
 
-        -- we have to call setup() manually here because lazy's require(MAIN).setup(opts) won't call
-        -- the specific tresitter config submodule
-        config = function ()
-            require("nvim-treesitter.configs").setup {
-                -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-                ensure_installed = {
-                    "c",
-                    "cpp",
-                    "rust",
-                    "python",
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "query",
-                    "markdown",
-                    "markdown_inline",
-                    "xml",
-                },
+            -- Install / keep the parsers above up to date (async on main).
+            require("nvim-treesitter").install(parsers)
 
-                -- Install parsers synchronously (only applied to `ensure_installed`)
-                sync_install = false,
+            local max_filesize = 500 * 1024 -- 500 KB
 
-                -- Automatically install missing parsers when entering buffer
-                -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-                auto_install = true,
-
-                -- List of parsers to ignore installing (or "all")
-                --ignore_install = { "javascript" },
-
-                ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-                -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-
-                indent = {
-                    enable = true
-                },
-
-                highlight = {
-                    enable = true,
-
-                    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-                    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-                    -- the name of the parser)
-                    -- list of language that will be disabled
-                    --disable = { "c", "rust" },
-                    -- Disable treesitter highlight for large files (performance)
-                    disable = function(lang, buf)
-                        local max_filesize = 500 * 1024 -- 500 KB
-                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                        if ok and stats and stats.size > max_filesize then
-                            return true
-                        end
-                    end,
-
-                    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-                    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-                    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-                    -- Instead of true it can also be a list of languages
-                    additional_vim_regex_highlighting = false,
-                }
-            }
-        end
+            -- main does NOT auto-enable highlight/indent — do it per buffer.
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function(ev)
+                    local buf = ev.buf
+                    -- Skip very large files (performance).
+                    local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+                    if ok and stats and stats.size > max_filesize then
+                        return
+                    end
+                    -- Start TS highlighting if a parser exists for this filetype;
+                    -- pcall swallows the error for filetypes without a parser.
+                    if pcall(vim.treesitter.start) then
+                        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end
+                end,
+            })
+        end,
     },
     {
         "nvim-treesitter/nvim-treesitter-context",
@@ -88,8 +71,6 @@ return {
             -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
             separator = nil,
             zindex = 20, -- The Z-index of the context window
-            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
         }
     }
 }
-
