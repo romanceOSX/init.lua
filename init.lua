@@ -1,1 +1,4 @@
-/nix/store/i0l1bb6x2xbk81axps0i9cpizi5xsl9c-home-manager-files/.config/nvim/init.lua
+-- romanceOSX neovim config 
+--> https://github.com/romanceOSX/init.lua
+require("romance")
+
