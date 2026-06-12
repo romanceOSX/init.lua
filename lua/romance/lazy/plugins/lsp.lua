@@ -76,6 +76,17 @@ return {
             },
         })
 
+        -- bashls: bash LSP — also attach to zsh (no zsh-specific server exists;
+        -- bash-language-server works fine for navigation/completion on .zsh).
+        vim.lsp.config('bashls', {
+            filetypes = { 'sh', 'bash', 'zsh' },
+        })
+
+        -- Actually start the configured servers. vim.lsp.config() only DEFINES a
+        -- server's settings; vim.lsp.enable() is what registers the FileType hook
+        -- that launches it. nvim-lspconfig 2.x does not auto-enable.
+        vim.lsp.enable({ 'lua_ls', 'pyright', 'clangd', 'rust_analyzer', 'bashls' })
+
         -- Reload rust-analyzer workspace when new files are created
         vim.api.nvim_create_autocmd("BufNewFile", {
             pattern = "*.rs",

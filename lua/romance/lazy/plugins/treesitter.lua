@@ -19,6 +19,7 @@ local parsers = {
     "markdown",
     "markdown_inline",
     "xml",
+    "bash", -- also drives zsh highlighting (registered to the zsh filetype below)
 }
 
 return {
@@ -32,6 +33,10 @@ return {
 
             -- Install / keep the parsers above up to date (async on main).
             require("nvim-treesitter").install(parsers)
+
+            -- zsh has no dedicated grammar; drive it with the bash parser so .zsh
+            -- files get treesitter highlighting/indent too.
+            vim.treesitter.language.register("bash", "zsh")
 
             local max_filesize = 500 * 1024 -- 500 KB
 

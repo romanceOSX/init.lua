@@ -47,6 +47,46 @@ return {
             telescope.setup(opts)
             telescope.load_extension('fzf')
 
+            --- shell history picker (fuzzy-search ~/.history, like ^R in zsh) ---
+            local function shell_history()
+                local pickers      = require("telescope.pickers")
+                local finders      = require("telescope.finders")
+                local conf         = require("telescope.config").values
+                local actions      = require("telescope.actions")
+                local action_state = require("telescope.actions.state")
+
+                local histfile = vim.fn.expand("~/.history")
+                local seen, results = {}, {}
+                -- newest-first, de-duplicated. Strip zsh extended-history
+                -- metadata (": <ts>:<dur>;cmd") when present; plain lines pass through.
+                for _, line in ipairs(vim.fn.reverse(vim.fn.readfile(histfile))) do
+                    local cmd = line:gsub("^:%s*%d+:%d+;", "")
+                    if cmd ~= "" and not seen[cmd] then
+                        seen[cmd] = true
+                        results[#results + 1] = cmd
+                    end
+                end
+
+                pickers.new({}, {
+                    prompt_title = "Shell history",
+                    finder = finders.new_table({ results = results }),
+                    sorter = conf.generic_sorter({}),
+                    attach_mappings = function(bufnr)
+                        -- <CR>  → insert the command at the cursor
+                        actions.select_default:replace(function()
+                            actions.close(bufnr)
+                            vim.api.nvim_put({ action_state.get_selected_entry()[1] }, "", true, true)
+                        end)
+                        -- <C-y> → yank to the system clipboard instead
+                        actions.select_horizontal:replace(function()
+                            actions.close(bufnr)
+                            vim.fn.setreg("+", action_state.get_selected_entry()[1])
+                        end)
+                        return true
+                    end,
+                }):find()
+            end
+
             --- keymaps ---
             local builtin = require("telescope.builtin")
 
@@ -84,6 +124,9 @@ return {
             vim.keymap.set("n", "<leader>gc", builtin.git_commits)
             vim.keymap.set("n", "<leader>gs", builtin.git_status)
             vim.keymap.set("n", "<leader>gs", builtin.git_stash)
+
+            -- shell history (fuzzy ^R over ~/.history)
+            vim.keymap.set("n", "<leader>sh", shell_history, { desc = "Telescope shell history" })
 
             -- telescope
             vim.keymap.set("n", "<leader>tt", builtin.builtin)
