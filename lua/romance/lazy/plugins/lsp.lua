@@ -18,6 +18,7 @@ return {
                 rust   = { "rustfmt" },
                 c      = { "clang_format" },
                 cpp    = { "clang_format" },
+                markdown = { "prettier", "mdformat", stop_after_first = true },
             },
             format_on_save = {
                 timeout_ms = 500,
@@ -82,10 +83,14 @@ return {
             filetypes = { 'sh', 'bash', 'zsh' },
         })
 
+        -- marksman: markdown LSP — go-to-definition on [links], completion for
+        -- headings/link refs, rename across the vault. Binary managed by Nix.
+        vim.lsp.config('marksman', {})
+
         -- Actually start the configured servers. vim.lsp.config() only DEFINES a
         -- server's settings; vim.lsp.enable() is what registers the FileType hook
         -- that launches it. nvim-lspconfig 2.x does not auto-enable.
-        vim.lsp.enable({ 'lua_ls', 'pyright', 'clangd', 'rust_analyzer', 'bashls' })
+        vim.lsp.enable({ 'lua_ls', 'pyright', 'clangd', 'rust_analyzer', 'bashls', 'marksman' })
 
         -- Reload rust-analyzer workspace when new files are created
         vim.api.nvim_create_autocmd("BufNewFile", {
