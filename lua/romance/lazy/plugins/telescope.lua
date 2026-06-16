@@ -117,6 +117,8 @@ return {
             vim.keymap.set("n", "<leader>li", builtin.lsp_incoming_calls)
             vim.keymap.set("n", "<leader>ls", builtin.lsp_workspace_symbols)
             vim.keymap.set("n", "<leader>lt", builtin.lsp_type_definitions)
+            -- document symbols = headings/sections in this buffer (fuzzy jump)
+            vim.keymap.set("n", "<leader>fo", builtin.lsp_document_symbols, { desc = "Outline / sections (this file)" })
 
             -- git
             vim.keymap.set("n", "<leader>gb", builtin.git_branches)
