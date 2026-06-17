@@ -30,13 +30,14 @@ end
 -- install with yarn or npm
 return {
 	"iamcco/markdown-preview.nvim",
+	-- Use the nixpkgs-built plugin (server pre-bundled with vendored
+	-- node_modules) instead of letting lazy clone + build it. home-manager
+	-- symlinks the store path here (see dotfiles home/programs.nix). This makes
+	-- the preview reproducible with no build step and no network at first
+	-- launch. The plugin runs the server via `node app/index.js` using those
+	-- vendored modules, so nodejs (in nix) is the only runtime requirement.
+	dir = vim.fn.stdpath("data") .. "/nix-plugins/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-	-- Download the pre-built preview server synchronously. The plugin's own
-	-- `mkdp#util#install()` spawns an async terminal that detaches under lazy's
-	-- build step and never finishes (leaves app/bin empty -> preview can't
-	-- start). install.sh fetches the right prebuilt binary for the platform
-	-- (macOS arm64/x86, Linux x86_64), so node isn't needed at runtime.
-	build = "cd app && ./install.sh",
 	init = function()
 		vim.g.mkdp_filetypes = { "markdown" }
 	end,
