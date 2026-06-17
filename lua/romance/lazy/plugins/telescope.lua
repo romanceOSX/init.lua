@@ -88,10 +88,108 @@ return {
             end
 
             --- keymaps ---
-            local builtin = require("telescope.builtin")
+            local builtin       = require("telescope.builtin")
+            local entry_display = require("telescope.pickers.entry_display")
+            local make_entry    = require("telescope.make_entry")
+            local ts_utils      = require("telescope.utils")
+
+            -- Rainbow-pastel entry makers: colour each column with sakura theme
+            -- groups (Function=rose, Number=purple, String=green, Type=blue,
+            -- Comment=muted) so the lists match the rest of the colourscheme and
+            -- follow the light/dark switch automatically.
+            local function keymaps_entry_maker(opts)
+                opts = opts or {}
+                local displayer
+                local function get_displayer()
+                    -- built lazily: builtin.keymaps sets opts.width_lhs before render
+                    displayer = displayer or entry_display.create({
+                        separator = " ▏",
+                        items = {
+                            { width = 3 },                 -- mode
+                            { width = opts.width_lhs or 20 }, -- the shortcut
+                            { remaining = true },          -- description / action
+                        },
+                    })
+                    return displayer
+                end
+
+                local function get_desc(entry)
+                    if entry.callback and not entry.desc then
+                        return require("telescope.actions.utils")._get_anon_function_name(debug.getinfo(entry.callback))
+                    end
+                    return vim.F.if_nil(entry.desc, entry.rhs):gsub("\n", "\\n")
+                end
+
+                local make_display = function(e)
+                    return get_displayer()({
+                        { e.mode, "Number" },   -- purple: mode
+                        { e.lhs,  "Function" }, -- rose:   the shortcut keys
+                        { e.desc, "String" },   -- green:  what it does
+                    })
+                end
+
+                return function(entry)
+                    local lhs  = ts_utils.display_termcodes(entry.lhs)
+                    local desc = get_desc(entry)
+                    return make_entry.set_default_entry_mt({
+                        mode    = entry.mode,
+                        lhs     = lhs,
+                        desc    = desc,
+                        valid   = entry ~= "",
+                        value   = entry,
+                        ordinal = entry.mode .. " " .. lhs .. " " .. desc,
+                        display = make_display,
+                    }, opts)
+                end
+            end
+
+            local function commands_entry_maker(opts)
+                opts = opts or {}
+                local displayer = entry_display.create({
+                    separator = " ▏",
+                    items = {
+                        { width = 0.25 }, -- name
+                        { width = 4 },    -- nargs
+                        { width = 11 },   -- completion type
+                        { remaining = true }, -- definition
+                    },
+                })
+                local make_display = function(e)
+                    return displayer({
+                        { e.name,                                "Function" }, -- rose:   command
+                        { e.nargs,                               "Number" },   -- purple: nargs
+                        { e.complete or "",                      "Type" },     -- blue:   completion
+                        { (e.definition or ""):gsub("\n", " "),  "Comment" },  -- muted:  definition
+                    })
+                end
+                return function(entry)
+                    return make_entry.set_default_entry_mt({
+                        name       = entry.name,
+                        bang       = entry.bang,
+                        nargs      = entry.nargs,
+                        complete   = entry.complete,
+                        definition = entry.definition,
+                        value      = entry,
+                        ordinal    = entry.name,
+                        display    = make_display,
+                    }, opts)
+                end
+            end
 
             -- Help menu
             vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+            -- Keymaps & commands (fuzzy search current shortcuts/commands)
+            vim.keymap.set('n', '<leader>fk', function()
+                local opts = {}
+                opts.entry_maker = keymaps_entry_maker(opts) -- share opts so width_lhs propagates
+                builtin.keymaps(opts)
+            end, { desc = 'Telescope keymaps' })
+            vim.keymap.set('n', '<leader>fc', function()
+                local opts = {}
+                opts.entry_maker = commands_entry_maker(opts)
+                builtin.commands(opts)
+            end, { desc = 'Telescope commands' })
 
             -- Buffers
             vim.keymap.set("n", "<leader>b", builtin.buffers)
