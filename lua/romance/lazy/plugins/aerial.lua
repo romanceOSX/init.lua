@@ -39,7 +39,7 @@ return {
      -- creating the `aerial` buffer mid-cascade, which makes the treesitter
      -- FileType autocmd throw trying to start a parser for language "aerial".
      if vim.bo.filetype == "markdown" then
-        vim.schedule(function() require("aerial").open() end)
+        vim.schedule(function() require("aerial").open({ focus = false }) end)
      end
   end,
 }
