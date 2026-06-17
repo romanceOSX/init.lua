@@ -109,8 +109,8 @@ return {
             end)
             vim.keymap.set("n", "<leader>mm", builtin.marks)
 
-            -- treesitter
-            vim.keymap.set("n", "<leader>fs", builtin.treesitter)
+            -- document symbols = headings/sections in this buffer (fuzzy jump)
+            vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Outline / sections (this file)" })
 
             -- lsp
             vim.keymap.set("n", "<leader>lr", builtin.lsp_references)
