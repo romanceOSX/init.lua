@@ -2,6 +2,37 @@ local M = {}
 
 local _zoom_state = nil
 
+-- Sidebar/UI filetypes that manage their own windows. They must not be rebuilt
+-- as plain splits during restore (doing so leaves an orphan buffer that the
+-- plugin then re-opens its own window beside — windows pile up every zoom).
+-- They are pruned from the captured layout and re-opened via their own API.
+local IGNORED_FILETYPES = {
+    aerial = true,
+}
+
+local function is_ignored_win(win)
+    if not vim.api.nvim_win_is_valid(win) then return true end
+    local buf = vim.api.nvim_win_get_buf(win)
+    return IGNORED_FILETYPES[vim.bo[buf].filetype] == true
+end
+
+-- Prune ignored-window leaves from a winlayout tree, collapsing any node left
+-- with a single child. Returns the pruned node, or nil if nothing real remains.
+local function prune(node)
+    if node[1] == "leaf" then
+        if is_ignored_win(node[2]) then return nil end
+        return node
+    end
+    local kept = {}
+    for _, child in ipairs(node[2]) do
+        local p = prune(child)
+        if p then kept[#kept + 1] = p end
+    end
+    if #kept == 0 then return nil end
+    if #kept == 1 then return kept[1] end
+    return { node[1], kept }
+end
+
 local function capture()
     local wins = {}
     for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -12,10 +43,20 @@ local function capture()
             height = vim.api.nvim_win_get_height(win),
         }
     end
+    -- Was the aerial outline open? Re-open it (via its own API) on restore.
+    local aerial_open = false
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.bo[vim.api.nvim_win_get_buf(win)].filetype == "aerial" then
+            aerial_open = true
+            break
+        end
+    end
+
     return {
-        tree    = vim.fn.winlayout(),
-        wins    = wins,
-        current = vim.api.nvim_get_current_win(),
+        tree        = prune(vim.fn.winlayout()),
+        wins        = wins,
+        current     = vim.api.nvim_get_current_win(),
+        aerial_open = aerial_open,
     }
 end
 
@@ -83,17 +124,24 @@ function M.zoom_toggle()
     if _zoom_state then
         local saved = _zoom_state
         _zoom_state = nil
-        vim.cmd("only")
-        local id_map = {}
-        restore_node(saved.tree, saved.wins, id_map)
-        local target = id_map[saved.current]
-        if target and vim.api.nvim_win_is_valid(target) then
-            vim.api.nvim_set_current_win(target)
+        vim.cmd("silent only")
+        if saved.tree then
+            local id_map = {}
+            restore_node(saved.tree, saved.wins, id_map)
+            local target = id_map[saved.current]
+            if target and vim.api.nvim_win_is_valid(target) then
+                vim.api.nvim_set_current_win(target)
+            end
+        end
+        -- Re-open sidebars through their own API so they stay plugin-managed
+        -- (focus stays in the file window).
+        if saved.aerial_open then
+            pcall(function() require("aerial").open({ focus = false }) end)
         end
     else
         if #vim.api.nvim_list_wins() < 2 then return end
         _zoom_state = capture()
-        vim.cmd("only")
+        vim.cmd("silent only")
     end
 end
 
