@@ -433,6 +433,23 @@ local theme = lush(function(injected_functions)
     sym"@debug"             { Debug }, -- Debug
     -- sym"@tag"               { }, -- Tag
 
+    -- Markdown / markup (treesitter @markup.* captures)
+    sym"@markup.strong"        { fg = palette.sa0, bold = true },          -- **bold**
+    sym"@markup.italic"        { fg = palette.gb0, italic = true },        -- *italic*
+    sym"@markup.strikethrough" { fg = palette.bg3, strikethrough = true }, -- ~~strike~~
+    sym"@markup.underline"     { fg = palette.fg0, underline = true },
+    sym"@markup.heading"       { fg = palette.pi0, bold = true },          -- # Heading
+    sym"@markup.quote"         { fg = palette.fg8, italic = true },        -- > blockquote
+    sym"@markup.math"          { fg = palette.gp0 },                       -- $math$
+    sym"@markup.raw"           { fg = palette.gr0 },                       -- `inline code`
+    sym"@markup.raw.block"     { fg = palette.gr0 },                       -- fenced code block
+    sym"@markup.link"          { fg = palette.gb0 },                       -- link
+    sym"@markup.link.label"    { fg = palette.yl0 },                       -- [label]
+    sym"@markup.link.url"      { fg = palette.gb1, underline = true },     -- (url)
+    sym"@markup.list"          { fg = palette.pi1 },                       -- - list markers
+    sym"@markup.list.checked"  { fg = palette.gr0 },                       -- [x]
+    sym"@markup.list.unchecked"{ fg = palette.er0 },                       -- [ ]
+
     sym"@type.builtin.tsx" { Type },
     sym"@tag.tsx"          { fg = palette.fg1 },
 
