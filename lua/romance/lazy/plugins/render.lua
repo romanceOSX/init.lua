@@ -27,16 +27,18 @@ local function render_file()
 	renderer()
 end
 
+-- Preferred source: the nixpkgs-built plugin (preview server pre-bundled with
+-- vendored node_modules) that home-manager symlinks here (see dotfiles
+-- home/programs.nix). Using it makes the preview reproducible with no build
+-- step and no network at first launch; the server runs via `node app/index.js`
+-- against those vendored modules, so nodejs is the only runtime requirement.
+local nix_plugin_dir = vim.fn.stdpath("data") .. "/nix-plugins/markdown-preview.nvim"
+local has_nix_plugin = vim.uv and vim.uv.fs_stat(nix_plugin_dir) ~= nil
+	or vim.loop.fs_stat(nix_plugin_dir) ~= nil
+
 -- install with yarn or npm
-return {
+local spec = {
 	"iamcco/markdown-preview.nvim",
-	-- Use the nixpkgs-built plugin (server pre-bundled with vendored
-	-- node_modules) instead of letting lazy clone + build it. home-manager
-	-- symlinks the store path here (see dotfiles home/programs.nix). This makes
-	-- the preview reproducible with no build step and no network at first
-	-- launch. The plugin runs the server via `node app/index.js` using those
-	-- vendored modules, so nodejs (in nix) is the only runtime requirement.
-	dir = vim.fn.stdpath("data") .. "/nix-plugins/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 	init = function()
 		vim.g.mkdp_filetypes = { "markdown" }
@@ -48,3 +50,18 @@ return {
 		{ "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Toggle markdown preview" },
 	},
 }
+
+if has_nix_plugin then
+	-- Point lazy at the nix-vendored copy; no git clone, no build step.
+	spec.dir = nix_plugin_dir
+else
+	-- Fallback when the home-manager symlink isn't present (e.g. the active
+	-- generation predates it, or on a non-nix host): let lazy clone the plugin
+	-- and fetch the prebuilt preview server synchronously. The plugin's own
+	-- `mkdp#util#install()` spawns an async terminal that detaches under lazy's
+	-- build step and never finishes (leaves app/bin empty -> preview can't
+	-- start), so we run install.sh directly instead.
+	spec.build = "cd app && ./install.sh"
+end
+
+return spec
