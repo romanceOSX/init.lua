@@ -87,6 +87,77 @@ return {
                 }):find()
             end
 
+            --- clipboard history picker (reads ~/.local/share/cliph/ on macOS, cliphist on Linux) ---
+            local function cliph_history()
+                local pickers      = require("telescope.pickers")
+                local finders      = require("telescope.finders")
+                local conf         = require("telescope.config").values
+                local actions      = require("telescope.actions")
+                local action_state = require("telescope.actions.state")
+
+                local entries = {}
+                local get_content
+
+                if vim.fn.has("mac") == 1 then
+                    local xdg_data = vim.env.XDG_DATA_HOME or (vim.env.HOME .. "/.local/share")
+                    local cliph_dir = xdg_data .. "/cliph"
+                    local ok, lines = pcall(vim.fn.readfile, cliph_dir .. "/history")
+                    if not ok or vim.tbl_isempty(lines) then
+                        vim.notify("No clipboard history yet — is clipd running?", vim.log.levels.WARN)
+                        return
+                    end
+                    for _, line in ipairs(vim.fn.reverse(lines)) do
+                        local ts, preview = line:match("^([^\t]+)\t(.*)")
+                        if ts then entries[#entries + 1] = { id = ts, preview = preview } end
+                    end
+                    get_content = function(e)
+                        local ok2, data = pcall(vim.fn.readfile, cliph_dir .. "/entries/" .. e.id)
+                        return ok2 and data or {}
+                    end
+                else
+                    local raw = vim.fn.systemlist("cliphist list 2>/dev/null")
+                    if vim.v.shell_error ~= 0 or vim.tbl_isempty(raw) then
+                        vim.notify("No clipboard history (cliphist list failed)", vim.log.levels.WARN)
+                        return
+                    end
+                    for _, line in ipairs(raw) do
+                        local preview = line:match("^[^\t]+\t?(.*)")
+                        entries[#entries + 1] = { id = line, preview = preview or line }
+                    end
+                    get_content = function(e)
+                        return vim.fn.systemlist(
+                            "printf '%s' " .. vim.fn.shellescape(e.id) .. " | cliphist decode 2>/dev/null"
+                        )
+                    end
+                end
+
+                if vim.tbl_isempty(entries) then
+                    vim.notify("Clipboard history is empty", vim.log.levels.WARN)
+                    return
+                end
+
+                pickers.new({}, {
+                    prompt_title = "Clipboard history",
+                    finder = finders.new_table({
+                        results = entries,
+                        entry_maker = function(e)
+                            return { value = e, display = e.preview, ordinal = e.preview }
+                        end,
+                    }),
+                    sorter = conf.generic_sorter({}),
+                    attach_mappings = function(bufnr)
+                        actions.select_default:replace(function()
+                            actions.close(bufnr)
+                            local content = get_content(action_state.get_selected_entry().value)
+                            vim.schedule(function()
+                                vim.api.nvim_put(content, "c", false, true)
+                            end)
+                        end)
+                        return true
+                    end,
+                }):find()
+            end
+
             --- keymaps ---
             local builtin       = require("telescope.builtin")
             local entry_display = require("telescope.pickers.entry_display")
@@ -227,6 +298,10 @@ return {
 
             -- shell history (fuzzy ^R over ~/.history)
             vim.keymap.set("n", "<leader>sh", shell_history, { desc = "Telescope shell history" })
+
+            -- clipboard history (mirrors ^Y in zsh — pick an entry, insert at cursor)
+            vim.keymap.set({ "n", "i" }, "<M-y>", cliph_history, { desc = "Clipboard history" })
+            vim.keymap.set("n", "<leader>cy", cliph_history, { desc = "Clipboard history" })
 
             -- telescope
             vim.keymap.set("n", "<leader>tt", builtin.builtin)
