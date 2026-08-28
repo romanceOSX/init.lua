@@ -44,7 +44,14 @@ local function follow_link()
     vim.cmd("tag " .. vim.fn.expand("<cword>"))
 end
 
-vim.keymap.set("n", "<C-]>", follow_link, { desc = "Follow link or tag jump" })
+-- buffer-local so it doesn't shadow <C-]> (LSP go-to-definition, see lsp.lua)
+-- in every other filetype.
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function(ev)
+        vim.keymap.set("n", "<C-]>", follow_link, { buffer = ev.buf, desc = "Follow link or tag jump" })
+    end,
+})
 
 return {
     {

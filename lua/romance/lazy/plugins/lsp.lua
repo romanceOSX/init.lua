@@ -122,6 +122,18 @@ return {
         vim.keymap.set("n", "<leader>lo", vim.lsp.buf.type_definition)
         vim.keymap.set("n", "<leader>lc", vim.lsp.buf.incoming_calls)
 
+        -- <C-]>: LSP go-to-definition when a client supports it, otherwise
+        -- fall back to a plain ctags jump (markdown buffers override this
+        -- with their own link-follow mapping, see markdown-edit.lua).
+        vim.keymap.set("n", "<C-]>", function()
+            local clients = vim.lsp.get_clients({ bufnr = 0, method = "textDocument/definition" })
+            if #clients > 0 then
+                vim.lsp.buf.definition()
+            else
+                vim.cmd("tag " .. vim.fn.expand("<cword>"))
+            end
+        end, { desc = "LSP definition (fallback: tag jump)" })
+
         --
         -- lsp-toggle.lua
         --
